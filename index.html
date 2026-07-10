@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>卡塞尔学院 · Cassell College</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Noto+Serif+SC:wght@300;400;500;600;700&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --parchment:#f5f0e4;
+  --parchment-deep:#ede5d2;
+  --ink:#2b241c;
+  --ink-soft:#5a5040;
+  --crimson:#7a1f23;
+  --crimson-deep:#5c1518;
+  --gold:#a8873d;
+  --gold-soft:#c4a96a;
+  --line:#d8cdb4;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--parchment);
+  color:var(--ink);
+  font-family:'Noto Serif SC','EB Garamond',serif;
+  line-height:1.9;
+  font-size:16px;
+  background-image:
+    radial-gradient(ellipse at 20% 0%, rgba(168,135,61,.06), transparent 55%),
+    radial-gradient(ellipse at 80% 100%, rgba(122,31,35,.05), transparent 55%);
+}
+::selection{background:var(--crimson);color:var(--parchment);}
+a{color:inherit;text-decoration:none;}
+.en{font-family:'Cinzel','EB Garamond',serif;letter-spacing:.14em;}
+
+/* ---------- top bar ---------- */
+.topbar{
+  background:var(--crimson-deep);
+  color:#e9ddc4;
+  font-size:12.5px;
+  letter-spacing:.08em;
+  padding:6px 0;
+}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;}
+.topbar span{opacity:.85;}
+
+/* ---------- header ---------- */
+header.site{
+  background:linear-gradient(var(--parchment), var(--parchment-deep));
+  border-bottom:3px double var(--gold);
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 1px 12px rgba(43,36,28,.08);
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+.masthead{
+  display:flex;align-items:center;gap:20px;
+  padding:16px 0 12px;
+}
+.masthead svg{flex:none;}
+.masthead .titles h1{
+  font-size:27px;font-weight:600;letter-spacing:.32em;color:var(--crimson-deep);
+}
+.masthead .titles .sub{
+  font-size:12px;color:var(--ink-soft);letter-spacing:.26em;margin-top:2px;
+}
+.masthead .est{
+  margin-left:auto;text-align:right;font-size:12px;color:var(--ink-soft);
+  letter-spacing:.18em;line-height:1.7;
+}
+.masthead .est b{color:var(--crimson);font-weight:600;}
+nav.main{
+  border-top:1px solid var(--line);
+}
+nav.main ul{
+  display:flex;list-style:none;justify-content:center;flex-wrap:wrap;
+}
+nav.main a{
+  display:block;padding:11px 22px;font-size:14.5px;letter-spacing:.22em;
+  color:var(--ink);transition:.25s;position:relative;
+}
+nav.main a:hover{color:var(--crimson);}
+nav.main a::after{
+  content:"";position:absolute;left:22px;right:22px;bottom:7px;height:1px;
+  background:var(--crimson);transform:scaleX(0);transition:.25s;
+}
+nav.main a:hover::after{transform:scaleX(1);}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;
+  background:
+    linear-gradient(rgba(26,20,14,.72), rgba(26,20,14,.78)),
+    radial-gradient(ellipse at 50% 120%, #4a3218, #17110b 70%);
+  color:#efe6d0;
+  text-align:center;
+  padding:110px 28px 120px;
+  overflow:hidden;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background-image:repeating-linear-gradient(0deg, transparent 0 2px, rgba(255,255,255,.012) 2px 4px);
+  pointer-events:none;
+}
+.hero .crest{margin-bottom:34px;opacity:.96;}
+.hero h2{
+  font-size:46px;font-weight:600;letter-spacing:.42em;text-indent:.42em;
+  color:#f2e8d2;margin-bottom:10px;
+}
+.hero .heroEn{
+  font-size:15px;color:var(--gold-soft);letter-spacing:.5em;margin-bottom:44px;
+}
+.hero .motto{
+  display:inline-block;
+  border-top:1px solid rgba(196,169,106,.55);
+  border-bottom:1px solid rgba(196,169,106,.55);
+  padding:16px 44px;
+  font-size:19px;letter-spacing:.5em;text-indent:.5em;
+  color:#e7d7ac;
+}
+.hero .mottoEn{
+  margin-top:14px;font-size:12.5px;letter-spacing:.34em;color:rgba(233,221,196,.6);
+  font-style:italic;font-family:'EB Garamond',serif;
+}
+.hero .lead{
+  max-width:620px;margin:48px auto 0;font-size:15px;line-height:2.2;
+  color:rgba(239,230,208,.82);font-weight:300;letter-spacing:.06em;
+}
+
+/* ---------- stats strip ---------- */
+.stats{
+  background:var(--crimson-deep);
+  border-top:1px solid rgba(196,169,106,.4);
+  border-bottom:3px double var(--gold);
+  color:#efe6d0;
+}
+.stats .wrap{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  text-align:center;
+}
+.stat{padding:30px 12px 26px;position:relative;}
+.stat + .stat::before{
+  content:"";position:absolute;left:0;top:26px;bottom:26px;width:1px;
+  background:rgba(196,169,106,.3);
+}
+.stat .num{
+  font-family:'Cinzel',serif;font-size:34px;font-weight:600;color:#e7d7ac;
+  line-height:1.2;letter-spacing:.04em;
+}
+.stat .num small{font-size:18px;color:var(--gold-soft);}
+.stat .lbl{font-size:12.5px;letter-spacing:.24em;margin-top:6px;opacity:.85;}
+.stat .lblEn{
+  font-size:9.5px;letter-spacing:.26em;color:var(--gold-soft);opacity:.8;
+  font-family:'Cinzel',serif;margin-top:3px;
+}
+@media (max-width:860px){
+  .stats .wrap{grid-template-columns:repeat(2,1fr);}
+  .stat:nth-child(3)::before{display:none;}
+}
+
+/* ---------- section scaffolding ---------- */
+section.block{padding:88px 0;}
+section.block.alt{background:var(--parchment-deep);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.secHead{text-align:center;margin-bottom:56px;}
+.secHead .kicker{
+  font-size:12px;letter-spacing:.5em;color:var(--gold);text-transform:uppercase;
+  font-family:'Cinzel',serif;
+}
+.secHead h3{
+  font-size:30px;font-weight:600;letter-spacing:.3em;text-indent:.3em;
+  color:var(--crimson-deep);margin-top:10px;
+}
+.secHead .rule{
+  width:64px;height:2px;background:var(--gold);margin:22px auto 0;position:relative;
+}
+.secHead .rule::before,.secHead .rule::after{
+  content:"";position:absolute;top:-2px;width:6px;height:6px;transform:rotate(45deg);
+  background:var(--gold);
+}
+.secHead .rule::before{left:-16px;}
+.secHead .rule::after{right:-16px;}
+
+/* ---------- about ---------- */
+.aboutGrid{display:grid;grid-template-columns:1.25fr .9fr;gap:56px;align-items:start;}
+.aboutGrid .prose p{margin-bottom:22px;text-align:justify;color:var(--ink);}
+.aboutGrid .prose p:first-of-type::first-letter{
+  font-size:52px;font-family:'EB Garamond',serif;color:var(--crimson);
+  float:left;line-height:1;padding:6px 10px 0 0;
+}
+.factCard{
+  background:var(--parchment);
+  border:1px solid var(--gold-soft);
+  outline:1px solid var(--gold-soft);
+  outline-offset:4px;
+  padding:34px 32px;
+}
+.factCard h4{
+  font-size:15px;letter-spacing:.34em;color:var(--crimson-deep);
+  text-align:center;margin-bottom:22px;font-weight:600;
+}
+.factCard dl{font-size:14.5px;}
+.factCard dt{color:var(--gold);font-size:12px;letter-spacing:.28em;margin-top:16px;}
+.factCard dd{color:var(--ink);margin-top:2px;letter-spacing:.04em;}
+.factCard dd small{color:var(--ink-soft);}
+
+/* ---------- timeline ---------- */
+.timeline{max-width:760px;margin:0 auto;position:relative;padding-left:36px;}
+.timeline::before{
+  content:"";position:absolute;left:8px;top:6px;bottom:6px;width:1px;
+  background:linear-gradient(var(--gold-soft), var(--crimson), var(--gold-soft));
+}
+.tItem{position:relative;padding:0 0 44px 26px;}
+.tItem:last-child{padding-bottom:0;}
+.tItem::before{
+  content:"";position:absolute;left:-32px;top:9px;width:9px;height:9px;
+  transform:rotate(45deg);background:var(--crimson);border:1px solid var(--gold);
+}
+.tItem .era{
+  font-family:'Cinzel',serif;font-size:13px;letter-spacing:.3em;color:var(--gold);
+}
+.tItem h5{font-size:18px;letter-spacing:.14em;color:var(--crimson-deep);margin:4px 0 8px;font-weight:600;}
+.tItem p{font-size:14.5px;color:var(--ink-soft);text-align:justify;}
+
+/* ---------- departments ---------- */
+.deptGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+.dept{
+  background:var(--parchment);
+  border:1px solid var(--line);
+  border-top:3px solid var(--crimson);
+  padding:30px 26px 26px;
+  transition:.3s;
+}
+.dept:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(43,36,28,.12);border-top-color:var(--gold);}
+.dept .no{
+  font-family:'Cinzel',serif;font-size:12px;color:var(--gold);letter-spacing:.3em;
+}
+.dept h5{font-size:18px;font-weight:600;letter-spacing:.12em;color:var(--crimson-deep);margin:8px 0 10px;}
+.dept p{font-size:13.5px;color:var(--ink-soft);line-height:1.9;text-align:justify;}
+
+/* ---------- organizations ---------- */
+.orgList{max-width:860px;margin:0 auto;}
+.org{
+  display:grid;grid-template-columns:150px 1fr;gap:34px;
+  padding:34px 8px;border-bottom:1px solid var(--line);align-items:start;
+}
+.org:first-child{border-top:1px solid var(--line);}
+.org .name{text-align:right;}
+.org .name h5{font-size:19px;font-weight:600;letter-spacing:.2em;color:var(--crimson-deep);}
+.org .name .en2{font-size:11px;letter-spacing:.2em;color:var(--gold);font-family:'Cinzel',serif;margin-top:4px;}
+.org p{font-size:14.5px;color:var(--ink);text-align:justify;}
+.org p em{color:var(--crimson);font-style:normal;}
+
+/* ---------- principal ---------- */
+.speech{
+  max-width:720px;margin:0 auto;text-align:center;
+}
+.speech .qmark{
+  font-family:'EB Garamond',serif;font-size:90px;line-height:.4;color:var(--gold-soft);
+  display:block;margin-bottom:26px;
+}
+.speech blockquote{
+  font-size:19px;line-height:2.3;letter-spacing:.1em;color:var(--ink);
+}
+.speech blockquote b{color:var(--crimson-deep);font-weight:600;letter-spacing:.2em;}
+.speech .sign{
+  margin-top:40px;font-size:14px;color:var(--ink-soft);letter-spacing:.24em;
+}
+.speech .sign b{color:var(--crimson-deep);font-size:16px;letter-spacing:.3em;}
+
+/* ---------- admission ---------- */
+.admGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-bottom:52px;}
+.adm{
+  text-align:center;padding:38px 26px;
+  background:var(--parchment);
+  border:1px solid var(--gold-soft);
+}
+.adm .step{
+  width:44px;height:44px;margin:0 auto 18px;border:1px solid var(--gold);
+  transform:rotate(45deg);display:flex;align-items:center;justify-content:center;
+}
+.adm .step span{transform:rotate(-45deg);font-family:'Cinzel',serif;color:var(--crimson);font-size:16px;}
+.adm h5{font-size:16.5px;letter-spacing:.18em;color:var(--crimson-deep);margin-bottom:10px;font-weight:600;}
+.adm p{font-size:13.5px;color:var(--ink-soft);text-align:justify;}
+.notice{
+  max-width:760px;margin:0 auto;text-align:center;
+  border:1px dashed var(--gold-soft);padding:26px 34px;
+  font-size:13.5px;color:var(--ink-soft);letter-spacing:.06em;line-height:2.1;
+  background:rgba(168,135,61,.04);
+}
+.notice b{color:var(--crimson);}
+
+/* ---------- footer ---------- */
+footer{
+  background:#1d1610;color:#b8a888;
+  padding:64px 0 30px;font-size:13px;letter-spacing:.08em;
+}
+footer .cols{
+  display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;
+  padding-bottom:44px;border-bottom:1px solid rgba(196,169,106,.2);
+}
+footer h6{
+  color:var(--gold-soft);font-size:13px;letter-spacing:.3em;margin-bottom:16px;font-weight:500;
+}
+footer ul{list-style:none;}
+footer li{margin-bottom:9px;opacity:.85;}
+footer li a:hover{color:#efe6d0;}
+footer .brand{display:flex;gap:16px;align-items:flex-start;}
+footer .brand .txt h6{margin-bottom:6px;letter-spacing:.28em;color:#efe6d0;font-size:16px;}
+footer .brand .txt p{opacity:.7;line-height:1.9;}
+footer .fine{
+  text-align:center;padding-top:26px;font-size:11.5px;opacity:.55;letter-spacing:.16em;line-height:2;
+}
+
+/* ---------- auth ---------- */
+.topbar .authLink{cursor:pointer;transition:.2s;}
+.topbar .authLink:hover{color:#fff;}
+.topbar .sep{margin:0 10px;opacity:.4;}
+.topbar #topbarUser b{color:var(--gold-soft);letter-spacing:.12em;}
+
+.modalMask{
+  position:fixed;inset:0;background:rgba(20,14,9,.75);
+  backdrop-filter:blur(3px);
+  display:none;align-items:center;justify-content:center;z-index:500;
+  padding:24px;
+}
+.modalMask.open{display:flex;}
+.modal{
+  width:100%;max-width:440px;background:var(--parchment);
+  border:1px solid var(--gold);outline:1px solid var(--gold);outline-offset:5px;
+  padding:40px 42px 36px;position:relative;
+  max-height:88vh;overflow-y:auto;
+  animation:modalIn .35s ease;
+}
+@keyframes modalIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
+.modal .close{
+  position:absolute;top:10px;right:16px;font-size:24px;color:var(--ink-soft);
+  cursor:pointer;line-height:1;background:none;border:none;font-family:inherit;
+}
+.modal .close:hover{color:var(--crimson);}
+.modal .mCrest{text-align:center;margin-bottom:14px;}
+.modal h4{
+  text-align:center;font-size:19px;letter-spacing:.3em;text-indent:.3em;
+  color:var(--crimson-deep);font-weight:600;
+}
+.modal .mSub{
+  text-align:center;font-size:10.5px;letter-spacing:.3em;color:var(--gold);
+  font-family:'Cinzel',serif;margin:4px 0 24px;
+}
+.authTabs{display:flex;border-bottom:1px solid var(--line);margin-bottom:24px;}
+.authTabs button{
+  flex:1;padding:10px 0;background:none;border:none;cursor:pointer;
+  font-family:inherit;font-size:14px;letter-spacing:.2em;color:var(--ink-soft);
+  border-bottom:2px solid transparent;margin-bottom:-1px;transition:.2s;
+}
+.authTabs button.act{color:var(--crimson-deep);border-bottom-color:var(--crimson);font-weight:600;}
+.fld{margin-bottom:18px;}
+.fld label{
+  display:block;font-size:11px;letter-spacing:.26em;color:var(--gold);
+  margin-bottom:6px;font-family:'Cinzel','Noto Serif SC',serif;
+}
+.fld input,.fld select{
+  width:100%;padding:11px 14px;font-family:inherit;font-size:15px;
+  background:#fffdf7;border:1px solid var(--line);color:var(--ink);
+  letter-spacing:.05em;outline:none;transition:.2s;
+}
+.fld input:focus,.fld select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(168,135,61,.12);}
+.btnMain{
+  width:100%;padding:13px 0;margin-top:6px;cursor:pointer;
+  background:var(--crimson);color:#f2e8d2;border:1px solid var(--crimson-deep);
+  font-family:inherit;font-size:15px;letter-spacing:.4em;text-indent:.4em;transition:.25s;
+}
+.btnMain:hover{background:var(--crimson-deep);}
+.authMsg{font-size:12.5px;text-align:center;margin-top:14px;min-height:1.6em;color:var(--crimson);letter-spacing:.06em;}
+.authOath{
+  font-size:11px;color:var(--ink-soft);text-align:center;margin-top:16px;
+  letter-spacing:.08em;line-height:1.9;border-top:1px dashed var(--line);padding-top:14px;
+}
+
+/* enrollment result / profile */
+.idCard{text-align:center;}
+.idCard .welcome{
+  font-size:13px;letter-spacing:.3em;color:var(--gold);margin-bottom:18px;
+  font-family:'Cinzel','Noto Serif SC',serif;
+}
+.idCard .stName{font-size:24px;font-weight:600;letter-spacing:.22em;color:var(--crimson-deep);}
+.idCard .stNo{
+  font-family:'Cinzel',serif;font-size:13px;letter-spacing:.28em;color:var(--ink-soft);
+  margin:6px 0 22px;
+}
+.idCard .rankBox{
+  display:inline-flex;flex-direction:column;align-items:center;justify-content:center;
+  width:108px;height:108px;border:1px solid var(--gold);
+  outline:1px solid var(--gold);outline-offset:4px;
+  margin-bottom:20px;background:rgba(122,31,35,.04);
+}
+.idCard .rankBox .r{
+  font-family:'Cinzel',serif;font-size:44px;font-weight:700;color:var(--crimson);line-height:1;
+}
+.idCard .rankBox .rl{font-size:10px;letter-spacing:.3em;color:var(--gold);margin-top:6px;}
+.idCard .rows{
+  text-align:left;font-size:13.5px;margin:0 auto 20px;max-width:300px;
+  border-top:1px solid var(--line);
+}
+.idCard .rows div{
+  display:flex;justify-content:space-between;padding:9px 2px;border-bottom:1px solid var(--line);
+}
+.idCard .rows span:first-child{color:var(--gold);font-size:11px;letter-spacing:.2em;font-family:'Cinzel','Noto Serif SC',serif;padding-top:2px;}
+.idCard .oathLine{
+  font-size:13.5px;letter-spacing:.14em;color:var(--ink);margin-bottom:22px;line-height:2.1;
+}
+.idCard .oathLine b{color:var(--crimson-deep);letter-spacing:.24em;}
+
+/* norma evaluation animation */
+.evalBox{text-align:center;padding:28px 0 12px;}
+.evalBox .evLine{
+  font-size:13px;color:var(--ink-soft);letter-spacing:.1em;min-height:1.8em;margin-bottom:20px;
+}
+.evalBox .bar{
+  height:3px;background:var(--line);max-width:280px;margin:0 auto;overflow:hidden;
+}
+.evalBox .bar i{
+  display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--crimson));
+  transition:width .5s ease;
+}
+
+/* ---------- department detail ---------- */
+.dept{cursor:pointer;position:relative;}
+.dept .more{
+  display:inline-block;margin-top:12px;font-size:11px;letter-spacing:.24em;
+  color:var(--gold);font-family:'Cinzel','Noto Serif SC',serif;transition:.25s;
+}
+.dept:hover .more{color:var(--crimson);letter-spacing:.34em;}
+.deptModal{
+  width:100%;max-width:760px;background:var(--parchment);
+  border:1px solid var(--gold);outline:1px solid var(--gold);outline-offset:5px;
+  max-height:90vh;overflow-y:auto;position:relative;
+  animation:modalIn .35s ease;
+}
+.deptModal .dHead{
+  background:linear-gradient(rgba(26,20,14,.82),rgba(26,20,14,.86)),
+    radial-gradient(ellipse at 50% 120%, #4a3218, #17110b 75%);
+  color:#efe6d0;text-align:center;padding:44px 40px 36px;
+}
+.deptModal .dHead .dNo{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.4em;color:var(--gold-soft);}
+.deptModal .dHead h4{font-size:28px;font-weight:600;letter-spacing:.3em;text-indent:.3em;margin:10px 0 6px;color:#f2e8d2;}
+.deptModal .dHead .dEn{font-size:11px;letter-spacing:.32em;color:var(--gold-soft);font-family:'Cinzel',serif;}
+.deptModal .dHead .dMotto{
+  display:inline-block;margin-top:18px;padding:8px 26px;font-size:13px;letter-spacing:.28em;
+  border-top:1px solid rgba(196,169,106,.5);border-bottom:1px solid rgba(196,169,106,.5);color:#e7d7ac;
+}
+.deptModal .dBody{padding:36px 44px 40px;}
+.deptModal .close{position:absolute;top:10px;right:16px;font-size:26px;color:#c4a96a;cursor:pointer;background:none;border:none;line-height:1;z-index:2;}
+.deptModal .close:hover{color:#fff;}
+.dSec{margin-bottom:30px;}
+.dSec h5{
+  font-size:15px;letter-spacing:.3em;color:var(--crimson-deep);font-weight:600;
+  border-left:3px solid var(--gold);padding-left:12px;margin-bottom:12px;
+}
+.dSec p{font-size:14px;color:var(--ink);text-align:justify;line-height:2;margin-bottom:10px;}
+.dSec p em{color:var(--crimson);font-style:normal;}
+.dTags{display:flex;flex-wrap:wrap;gap:8px;}
+.dTags span{
+  font-size:12px;letter-spacing:.12em;padding:5px 14px;
+  border:1px solid var(--gold-soft);color:var(--ink-soft);background:rgba(168,135,61,.06);
+}
+table.dCourses{width:100%;border-collapse:collapse;font-size:13px;}
+table.dCourses th{
+  background:var(--crimson-deep);color:#e9ddc4;font-weight:500;letter-spacing:.14em;
+  padding:9px 10px;font-size:12px;text-align:left;
+}
+table.dCourses td{padding:9px 10px;border-bottom:1px solid var(--line);color:var(--ink);vertical-align:top;}
+table.dCourses tr:nth-child(even) td{background:rgba(168,135,61,.05);}
+table.dCourses td b{color:var(--crimson-deep);font-weight:600;}
+table.dCourses td small{color:var(--ink-soft);}
+.dNote{font-size:12px;color:var(--ink-soft);letter-spacing:.06em;margin-top:10px;line-height:1.9;}
+.dNote b{color:var(--crimson);}
+#toast{
+  position:fixed;left:50%;bottom:70px;transform:translateX(-50%) translateY(20px);
+  background:var(--crimson-deep);color:#e9ddc4;padding:12px 30px;font-size:13.5px;
+  letter-spacing:.18em;opacity:0;pointer-events:none;transition:.4s;z-index:600;
+  border:1px solid var(--gold);
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+@media (max-width:860px){.deptModal .dBody{padding:26px 22px 30px;}}
+
+/* ---------- org detail ---------- */
+.org{cursor:pointer;transition:.25s;}
+.org:hover{background:rgba(168,135,61,.07);transform:translateX(4px);}
+.org .more{
+  display:inline-block;margin-top:10px;font-size:11px;letter-spacing:.24em;
+  color:var(--gold);font-family:'Cinzel','Noto Serif SC',serif;transition:.25s;
+}
+.org:hover .more{color:var(--crimson);letter-spacing:.34em;}
+.dLeader{
+  border:1px solid var(--gold-soft);outline:1px solid var(--gold-soft);outline-offset:3px;
+  padding:20px 24px;margin-bottom:12px;background:rgba(168,135,61,.04);
+}
+.dLeader .ln{font-size:19px;color:var(--crimson-deep);font-weight:600;letter-spacing:.1em;}
+.dLeader .lt{font-size:11.5px;color:var(--gold);letter-spacing:.24em;margin:2px 0 8px;font-family:'Cinzel','Noto Serif SC',serif;}
+.dLeader p{font-size:13px;color:var(--ink-soft);line-height:1.9;text-align:justify;margin:0;}
+.dRecruit{
+  border:2px dashed var(--crimson);padding:26px 28px;background:rgba(122,31,35,.045);
+}
+.dRecruit .rSlogan{
+  font-size:17px;letter-spacing:.22em;color:var(--crimson-deep);text-align:center;
+  font-weight:600;margin-bottom:16px;
+}
+.dRecruit p{font-size:13.5px;color:var(--ink);line-height:2;text-align:justify;margin-bottom:10px;}
+.dRecruit .rReq{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px;}
+.dRecruit .rReq span{
+  font-size:12px;letter-spacing:.1em;padding:5px 14px;
+  border:1px solid var(--crimson);color:var(--crimson-deep);background:var(--parchment);
+}
+.dRecruit .btnMain{width:auto;padding:12px 44px;display:block;margin:0 auto;}
+
+/* ---------- reveal on scroll ---------- */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform .9s cubic-bezier(.22,.61,.36,1);}
+.rv.on{opacity:1;transform:none;}
+
+/* ---------- smooth nav & chrome ---------- */
+section.block,#nightwatch{scroll-margin-top:118px;}
+nav.main a.cur{color:var(--crimson);font-weight:600;}
+nav.main a.cur::after{transform:scaleX(1);}
+#progress{
+  position:fixed;top:0;left:0;height:3px;width:0;z-index:400;
+  background:linear-gradient(90deg,var(--gold),var(--crimson));
+  transition:width .15s ease-out;
+}
+#toTop{
+  position:fixed;right:26px;bottom:28px;width:46px;height:46px;z-index:300;
+  border:1px solid var(--gold);background:var(--parchment);color:var(--crimson);
+  font-size:18px;cursor:pointer;opacity:0;pointer-events:none;
+  transition:.35s;box-shadow:0 6px 18px rgba(43,36,28,.18);
+  font-family:'Cinzel',serif;
+}
+#toTop.show{opacity:1;pointer-events:auto;}
+#toTop:hover{background:var(--crimson);color:var(--parchment);}
+
+/* ---------- nightwatch bbs ---------- */
+#nightwatch{
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(196,169,106,.07), transparent 50%),
+    linear-gradient(#182119, #10160f);
+  padding:88px 0;color:#d8cfb6;
+  border-top:3px double var(--gold);border-bottom:3px double var(--gold);
+}
+#nightwatch .secHead h3{color:#e7d7ac;}
+#nightwatch .secHead .kicker{color:var(--gold-soft);}
+.nwBar{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+  border:1px solid rgba(196,169,106,.35);padding:12px 20px;margin-bottom:26px;
+  font-size:12.5px;letter-spacing:.14em;color:#b8a888;background:rgba(0,0,0,.18);
+}
+.nwBar .dot{color:#7fb069;}
+.nwPost{
+  display:grid;grid-template-columns:86px 1fr auto;gap:18px;align-items:center;
+  padding:18px 20px;border:1px solid rgba(196,169,106,.22);border-top:none;
+  background:rgba(0,0,0,.14);transition:.25s;
+}
+.nwPost:first-of-type{border-top:1px solid rgba(196,169,106,.22);}
+.nwPost:hover{background:rgba(196,169,106,.07);transform:translateX(4px);}
+.nwTag{
+  text-align:center;font-size:11px;letter-spacing:.2em;padding:4px 0;
+  border:1px solid var(--gold-soft);color:var(--gold-soft);
+}
+.nwTag.hot{border-color:#c0392b;color:#e07b6a;}
+.nwTag.pin{border-color:#7fb069;color:#9fc98c;}
+.nwPost .tt{font-size:15px;color:#e9dfc4;letter-spacing:.05em;line-height:1.6;}
+.nwPost .meta{font-size:11.5px;color:#8d8168;margin-top:4px;letter-spacing:.1em;}
+.nwPost .meta b{color:var(--gold-soft);font-weight:500;}
+.nwPost .re{font-family:'Cinzel',serif;font-size:12px;color:#8d8168;text-align:right;white-space:nowrap;}
+.nwPost .re b{display:block;font-size:20px;color:#e7d7ac;}
+.nwCompose{margin-top:30px;border:1px dashed rgba(196,169,106,.4);padding:22px 24px;background:rgba(0,0,0,.18);}
+.nwCompose label{font-size:11px;letter-spacing:.3em;color:var(--gold-soft);font-family:'Cinzel','Noto Serif SC',serif;}
+.nwCompose textarea{
+  width:100%;margin-top:10px;padding:12px 14px;min-height:64px;resize:vertical;
+  background:rgba(245,240,228,.06);border:1px solid rgba(196,169,106,.3);
+  color:#e9dfc4;font-family:inherit;font-size:14px;letter-spacing:.04em;outline:none;
+}
+.nwCompose textarea:focus{border-color:var(--gold-soft);}
+.nwCompose .row{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:14px;flex-wrap:wrap;}
+.nwCompose .hint{font-size:11.5px;color:#8d8168;letter-spacing:.1em;}
+.nwBtn{
+  padding:10px 34px;cursor:pointer;background:transparent;color:#e7d7ac;
+  border:1px solid var(--gold-soft);font-family:inherit;font-size:13.5px;
+  letter-spacing:.3em;text-indent:.3em;transition:.25s;
+}
+.nwBtn:hover{background:var(--gold-soft);color:#10160f;}
+@media (max-width:860px){
+  .nwPost{grid-template-columns:70px 1fr;}
+  .nwPost .re{display:none;}
+  #toTop{right:16px;bottom:18px;}
+}
+
+@media (max-width:860px){
+  .aboutGrid,.deptGrid,.admGrid,footer .cols{grid-template-columns:1fr;}
+  .org{grid-template-columns:1fr;gap:8px;}
+  .org .name{text-align:left;}
+  .hero h2{font-size:32px;letter-spacing:.24em;}
+  .masthead .est{display:none;}
+  .masthead .titles h1{font-size:21px;letter-spacing:.2em;}
+}
+</style>
+</head>
+<body>
+
+<!-- 校徽：半朽的世界树院印（墨绿底 · 奶金树纹 · 环形拉丁文） -->
+<svg style="display:none" aria-hidden="true">
+  <symbol id="crestTree" viewBox="0 0 400 400">
+    <defs>
+      <path id="arcMotto" d="M 59,282 A 163,163 0 1 1 341,282" fill="none"/>
+      <path id="arcName" d="M 66,266 A 149,149 0 0 0 334,266" fill="none"/>
+    </defs>
+    <!-- seal disc -->
+    <circle cx="200" cy="200" r="198" fill="#1d4432"/>
+    <circle cx="200" cy="200" r="191" fill="none" stroke="#e8dcb8" stroke-width="3"/>
+    <circle cx="200" cy="200" r="185" fill="none" stroke="#e8dcb8" stroke-width="1.2"/>
+    <!-- latin motto ring -->
+    <text font-family="'EB Garamond','Noto Serif SC',serif" font-style="italic" font-size="19.5" letter-spacing="1.2" fill="#e8dcb8">
+      <textPath href="#arcMotto" startOffset="50%" text-anchor="middle">Bonum certamen certavi · cursum consummavi · fidem servavi</textPath>
+    </text>
+    <!-- inner ring -->
+    <circle cx="200" cy="200" r="140" fill="none" stroke="#e8dcb8" stroke-width="2.4"/>
+    <circle cx="200" cy="200" r="135" fill="none" stroke="#e8dcb8" stroke-width="1"/>
+    <!-- trunk -->
+    <path d="M 184,296 C 189,258 191,228 196,196 L 199,168 L 204,196 C 209,228 211,258 216,296 Z" fill="#e8dcb8"/>
+    <!-- living half (left): branches -->
+    <g stroke="#e8dcb8" fill="none" stroke-linecap="round">
+      <path d="M 198,208 C 172,192 152,176 137,152" stroke-width="8"/>
+      <path d="M 160,182 C 146,176 134,168 124,158" stroke-width="4.5"/>
+      <path d="M 198,236 C 175,230 157,219 147,202" stroke-width="6"/>
+      <path d="M 147,202 C 138,194 132,186 128,178" stroke-width="3.5"/>
+      <path d="M 199,196 C 191,172 187,152 189,130" stroke-width="6.5"/>
+      <path d="M 189,130 C 186,118 181,108 173,98" stroke-width="4"/>
+      <path d="M 137,152 C 128,140 122,128 120,114" stroke-width="4.5"/>
+    </g>
+    <!-- foliage -->
+    <g fill="#e8dcb8">
+      <ellipse cx="118" cy="106" rx="8" ry="4" transform="rotate(-50 118 106)"/>
+      <ellipse cx="128" cy="96" rx="8" ry="4" transform="rotate(-20 128 96)"/>
+      <ellipse cx="110" cy="120" rx="8" ry="4" transform="rotate(-70 110 120)"/>
+      <ellipse cx="130" cy="118" rx="7.5" ry="4" transform="rotate(-35 130 118)"/>
+      <ellipse cx="144" cy="104" rx="8" ry="4" transform="rotate(-15 144 104)"/>
+      <ellipse cx="158" cy="94" rx="8" ry="4" transform="rotate(-5 158 94)"/>
+      <ellipse cx="172" cy="86" rx="8" ry="4" transform="rotate(10 172 86)"/>
+      <ellipse cx="186" cy="92" rx="7.5" ry="4" transform="rotate(35 186 92)"/>
+      <ellipse cx="167" cy="106" rx="7.5" ry="4" transform="rotate(-25 167 106)"/>
+      <ellipse cx="151" cy="118" rx="7.5" ry="4" transform="rotate(-40 151 118)"/>
+      <ellipse cx="136" cy="132" rx="7.5" ry="4" transform="rotate(-55 136 132)"/>
+      <ellipse cx="114" cy="140" rx="7.5" ry="4" transform="rotate(-80 114 140)"/>
+      <ellipse cx="104" cy="156" rx="7.5" ry="4" transform="rotate(-85 104 156)"/>
+      <ellipse cx="112" cy="172" rx="7.5" ry="4" transform="rotate(-60 112 172)"/>
+      <ellipse cx="122" cy="186" rx="7" ry="3.8" transform="rotate(-45 122 186)"/>
+      <ellipse cx="140" cy="168" rx="7" ry="3.8" transform="rotate(-50 140 168)"/>
+      <ellipse cx="128" cy="150" rx="7" ry="3.8" transform="rotate(-65 128 150)"/>
+      <ellipse cx="152" cy="152" rx="7" ry="3.8" transform="rotate(-30 152 152)"/>
+      <ellipse cx="160" cy="132" rx="7" ry="3.8" transform="rotate(-20 160 132)"/>
+      <ellipse cx="176" cy="118" rx="7" ry="3.8" transform="rotate(-10 176 118)"/>
+      <ellipse cx="180" cy="104" rx="6.5" ry="3.5" transform="rotate(20 180 104)"/>
+      <ellipse cx="146" cy="138" rx="6.5" ry="3.5" transform="rotate(-45 146 138)"/>
+    </g>
+    <!-- withered half (right): bare gnarled branches -->
+    <g stroke="#e8dcb8" fill="none" stroke-linecap="round">
+      <path d="M 202,208 C 230,192 250,174 263,150" stroke-width="7"/>
+      <path d="M 263,150 C 272,142 280,136 290,132" stroke-width="3.5"/>
+      <path d="M 290,132 L 300,124 M 290,132 L 298,136" stroke-width="2.2"/>
+      <path d="M 263,150 C 266,138 266,128 262,116" stroke-width="3"/>
+      <path d="M 262,116 L 268,106 M 262,116 L 254,108" stroke-width="2"/>
+      <path d="M 240,178 C 252,172 262,170 274,172" stroke-width="3"/>
+      <path d="M 274,172 L 284,168 M 274,172 L 282,178" stroke-width="2"/>
+      <path d="M 202,238 C 228,232 248,220 258,204" stroke-width="5.5"/>
+      <path d="M 258,204 C 268,198 278,196 288,197" stroke-width="3"/>
+      <path d="M 288,197 L 297,192 M 288,197 L 295,203" stroke-width="2"/>
+      <path d="M 258,204 L 264,190 M 264,190 L 272,182 M 264,190 L 260,180" stroke-width="2.2"/>
+      <path d="M 201,196 C 210,172 215,150 212,126" stroke-width="6"/>
+      <path d="M 212,126 C 216,114 222,106 231,98" stroke-width="3.5"/>
+      <path d="M 231,98 L 240,90 M 231,98 L 238,102" stroke-width="2.2"/>
+      <path d="M 212,126 L 202,112 M 202,112 L 194,104 M 202,112 L 206,100" stroke-width="2.2"/>
+      <path d="M 214,152 C 224,146 232,144 242,146 M 242,146 L 250,140" stroke-width="2.4"/>
+    </g>
+    <!-- roots -->
+    <g stroke="#e8dcb8" fill="none" stroke-linecap="round">
+      <path d="M 188,294 C 172,304 156,308 140,308" stroke-width="5"/>
+      <path d="M 212,294 C 228,304 244,308 260,308" stroke-width="5"/>
+      <path d="M 198,296 C 194,306 190,312 184,318" stroke-width="4"/>
+      <path d="M 204,296 C 208,306 212,312 218,318" stroke-width="4"/>
+    </g>
+    <!-- serpent knot at roots -->
+    <g stroke="#e8dcb8" fill="none" stroke-width="4" stroke-linecap="round">
+      <path d="M 102,308 Q 126,294 150,308 T 198,308 T 246,308 T 294,308"/>
+      <path d="M 102,308 Q 126,322 150,308 T 198,308 T 246,308 T 294,308"/>
+    </g>
+    <circle cx="102" cy="308" r="4.5" fill="#e8dcb8"/>
+    <circle cx="294" cy="308" r="4.5" fill="#e8dcb8"/>
+    <!-- college name -->
+    <text font-family="'Cinzel','EB Garamond',serif" font-size="26" font-weight="600" letter-spacing="6" fill="#e8dcb8">
+      <textPath href="#arcName" startOffset="50%" text-anchor="middle">CASSELL COLLEGE</textPath>
+    </text>
+    <!-- flanking leaves -->
+    <ellipse cx="63" cy="296" rx="7" ry="3" transform="rotate(55 63 296)" fill="#e8dcb8"/>
+    <ellipse cx="337" cy="296" rx="7" ry="3" transform="rotate(-55 337 296)" fill="#e8dcb8"/>
+  </symbol>
+</svg>
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="en">SECRETUM · SANGUIS · GLADIUS</span>
+    <span id="topbarUser">
+      <a href="javascript:void(0)" onclick="openAuth('login')" class="authLink">STUDENT LOGIN · 学生登录</a>
+      <span class="sep">|</span>
+      <a href="javascript:void(0)" onclick="openAuth('register')" class="authLink">ENROLL · 注册学籍</a>
+    </span>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap masthead">
+    <!-- crest small -->
+    <svg width="58" height="58" aria-label="校徽 · 半朽的世界树" style="--c1:#7a1f23;--c2:#a8873d;">
+      <use href="#crestTree"/>
+    </svg>
+    <div class="titles">
+      <h1>卡塞尔学院</h1>
+      <div class="sub en">CASSELL COLLEGE</div>
+    </div>
+    <div class="est">
+      <span class="en">CHICAGO, ILLINOIS</span><br>
+      古老传承 · <b>秘党直属</b> · 百年学府
+    </div>
+  </div>
+  <nav class="main">
+    <ul>
+      <li><a href="#about">学院概况</a></li>
+      <li><a href="#history">历史沿革</a></li>
+      <li><a href="#departments">院系设置</a></li>
+      <li><a href="#organizations">组织机构</a></li>
+      <li><a href="#principal">校长致辞</a></li>
+      <li><a href="#admission">招生事务</a></li>
+      <li><a href="#nightwatch">守夜人专区</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div id="progress"></div>
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="返回顶部">▲</button>
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+  <svg class="crest" width="150" height="150" aria-hidden="true" style="--c1:#c4a96a;--c2:#e7d7ac;">
+    <use href="#crestTree"/>
+  </svg>
+  <h2>卡塞尔学院</h2>
+  <div class="heroEn en">CASSELL COLLEGE · SINCE THE AGE OF SECRETS</div>
+  <div>
+    <div class="motto">与 龙 族 势 不 两 立</div>
+    <div class="mottoEn">WE STAND AGAINST THE DRAGON, NOW AND EVER</div>
+  </div>
+  <p class="lead">
+    在世人眼中，这里是一所研究古代爬行动物的私立大学，坐落于伊利诺伊州芝加哥远郊、
+    五大湖畔的静谧山林之间。而在极少数人知晓的世界里，这里是延续数百年的屠龙者之家——
+    每一位踏入校门的学生，都将听见同一句话：欢迎回家。
+  </p>
+</div>
+
+<!-- ================= STATS ================= -->
+<div class="stats">
+  <div class="wrap">
+    <div class="stat">
+      <div class="num"><span data-count="3200">0</span><small>+</small></div>
+      <div class="lbl">在册混血种学生</div>
+      <div class="lblEn">ENROLLED STUDENTS</div>
+    </div>
+    <div class="stat">
+      <div class="num"><span data-count="47">0</span></div>
+      <div class="lbl">生源国家与地区</div>
+      <div class="lblEn">COUNTRIES &amp; REGIONS</div>
+    </div>
+    <div class="stat">
+      <div class="num"><span data-count="1200">0</span><small>+</small></div>
+      <div class="lbl">执行部年度任务</div>
+      <div class="lblEn">MISSIONS PER YEAR</div>
+    </div>
+    <div class="stat">
+      <div class="num"><span id="statReg">0</span></div>
+      <div class="lbl">本站新注册学籍</div>
+      <div class="lblEn">NEW ENROLLMENTS · LIVE</div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= ABOUT ================= -->
+<section class="block" id="about">
+  <div class="wrap">
+    <div class="secHead rv">
+      <div class="kicker">ABOUT THE COLLEGE</div>
+      <h3>学院概况</h3>
+      <div class="rule"></div>
+    </div>
+    <div class="aboutGrid">
+      <div class="prose rv">
+        <p>
+          卡塞尔学院是一所全封闭制私立大学，对外以「古代爬行动物研究」为学术旗帜，
+          在古生物学与地质年代学领域享有声望。学院以德国屠龙世家「卡塞尔」的姓氏命名，
+          其真正的使命自建校之日起从未改变：培养能够对抗龙族的混血种精英。
+        </p>
+        <p>
+          学院前身是欧洲古老组织「秘党」设立的屠龙者培养机构。在引入现代大学教育机制后，
+          它成为全世界混血种的聚居地与庇护所。来自各国的年轻人在这里接受严格的学术训练、
+          体能锤炼与言灵开发，毕业后多数进入执行部，奔赴世界各地执行任务。
+        </p>
+        <p>
+          校园中哥特式的钟楼与图书馆收藏着数百年来屠龙者留下的手稿与兵器，
+          地下则运行着学院的中枢——超级计算机「诺玛」。古老的传承与最尖端的科学在此并行不悖，
+          正如校徽上那株半朽的世界树：一半枯萎，铭记逝去的时代；一半繁茂，生长向新的黎明。
+        </p>
+      </div>
+      <aside class="factCard rv">
+        <h4>学 院 档 案</h4>
+        <dl>
+          <dt>LOCATION · 校址</dt>
+          <dd>Greater Chicago, Illinois, U.S.<br><small>美国伊利诺伊州 芝加哥远郊（五大湖区）</small></dd>
+          <dt>TYPE · 性质</dt>
+          <dd>Private Residential College<br><small>全封闭制私立大学（对外：古代爬行动物研究）</small></dd>
+          <dt>MOTTO · 校训</dt>
+          <dd>We Stand Against the Dragon<br><small>与龙族势不两立</small></dd>
+          <dt>PRINCIPAL · 现任校长</dt>
+          <dd>Hilbert Jean Anjou<br><small>希尔伯特 · 让 · 昂热</small></dd>
+          <dt>MAINFRAME · 中枢系统</dt>
+          <dd>NORMA — A.I. Supercomputer<br><small>诺玛 · 人工智能超级计算机</small></dd>
+          <dt>AFFILIATION · 隶属</dt>
+          <dd>The Secret Party<br><small>秘党</small></dd>
+          <dt>SCHOLARSHIP · 奖学金</dt>
+          <dd>Full Scholarship for All Students<br><small>全体在校生享全额奖学金</small></dd>
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HISTORY ================= -->
+<section class="block alt" id="history">
+  <div class="wrap">
+    <div class="secHead rv">
+      <div class="kicker">HERITAGE &amp; LEGACY</div>
+      <h3>历史沿革</h3>
+      <div class="rule"></div>
+    </div>
+    <div class="timeline">
+      <div class="tItem rv">
+        <div class="era">THE OLD WORLD · 旧世界</div>
+        <h5>秘党与屠龙世家</h5>
+        <p>
+          在龙族沉眠、人类遗忘的漫长年代里，欧洲的混血种组织「秘党」始终未曾放下手中的剑。
+          以德国卡塞尔家族为代表的屠龙世家世代相承，守护着关于龙族的全部秘密与技艺。
+        </p>
+      </div>
+      <div class="tItem rv">
+        <div class="era">THE LIONHEART · 狮心时代</div>
+        <h5>狮心会的荣光与哀悼</h5>
+        <p>
+          狮心会是秘党最古老的核心机构，汇聚了历代最勇敢的屠龙者。
+          「夏之哀悼」一役后，狮心会几乎全灭，唯有昂热幸存。那一夜的名字，至今铭刻在学院纪念堂的石壁上。
+        </p>
+      </div>
+      <div class="tItem rv">
+        <div class="era">THE FOUNDING · 建校</div>
+        <h5>卡塞尔学院成立</h5>
+        <p>
+          秘党引入现代大学教育机制，在芝加哥远郊建立卡塞尔学院，以系统化的学术体系取代旧式的师徒传承。
+          古老的誓言自此有了新的形态：一所大学，一代代年轻的屠龙者。
+        </p>
+      </div>
+      <div class="tItem rv">
+        <div class="era">THE PRESENT · 今日</div>
+        <h5>面向新的黎明</h5>
+        <p>
+          今天的卡塞尔学院拥有完整的学部建制、全球任务网络与人工智能中枢「诺玛」。
+          它依旧沉默地伫立在湖畔山林之间——等待，并且见证。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DEPARTMENTS ================= -->
+<section class="block" id="departments">
+  <div class="wrap">
+    <div class="secHead rv">
+      <div class="kicker">SCHOOLS &amp; DEPARTMENTS</div>
+      <h3>院系设置</h3>
+      <div class="rule"></div>
+    </div>
+    <div class="deptGrid">
+      <div class="dept rv" onclick="openDept('history')">
+        <div class="no">DEPT. I</div>
+        <h5>龙族历史系</h5>
+        <p>学院的立校之本。研究龙族的谱系、纪年与遗迹，解读青铜与火焰时代留下的铭文，为一切屠龙行动提供知识根基。</p>
+        <span class="more">查看院系档案 →</span>
+      </div>
+      <div class="dept rv" onclick="openDept('alchemy')">
+        <div class="no">DEPT. II</div>
+        <h5>炼金系</h5>
+        <p>传承自中世纪炼金术士的古老学科，与现代化学、材料科学深度融合，研究龙血、逆鳞与稀有金属的性质与应用。</p>
+        <span class="more">查看院系档案 →</span>
+      </div>
+      <div class="dept rv" onclick="openDept('mech')">
+        <div class="no">DEPT. III</div>
+        <h5>机械系</h5>
+        <p>负责屠龙装备的机械设计与制造工艺，与装备部关系密切。从精密齿轮到重型武装，皆出自机械系的图纸。</p>
+        <span class="more">查看院系档案 →</span>
+      </div>
+      <div class="dept rv" onclick="openDept('combat')">
+        <div class="no">DEPT. IV</div>
+        <h5>格斗系</h5>
+        <p>锤炼混血种的身体与意志。剑术、射击、近身格斗与战术协同——在言灵失效的时刻，你能依靠的只有训练。</p>
+        <span class="more">查看院系档案 →</span>
+      </div>
+      <div class="dept rv" onclick="openDept('info')">
+        <div class="no">DEPT. V</div>
+        <h5>信息系</h5>
+        <p>维护学院中枢「诺玛」，管理全体学生档案与全球情报网络。世界各地的异常数据，都在这里被静静注视。</p>
+        <span class="more">查看院系档案 →</span>
+      </div>
+      <div class="dept rv" onclick="openDept('journal')">
+        <div class="no">DEPT. VI</div>
+        <h5>新闻系</h5>
+        <p>在信息时代，掩盖真相与发现真相同样重要。新闻系训练学生从公开报道中捕捉龙族活动的蛛丝马迹。</p>
+        <span class="more">查看院系档案 →</span>
+      </div>
+      <div class="dept rv" onclick="openDept('mathphys')">
+        <div class="no">DEPT. VII</div>
+        <h5>数学系 · 物理系</h5>
+        <p>严谨的基础科学训练。言灵的边界、血统的规律，最终都要回到公式与实验中接受检验。</p>
+        <span class="more">查看院系档案 →</span>
+      </div>
+      <div class="dept rv" onclick="openDept('aero')">
+        <div class="no">DEPT. VIII</div>
+        <h5>航空航天工程学部</h5>
+        <p>学院规模最大的对外学部，承担正规学术声誉，同时为远程任务提供飞行器与载具技术支持。</p>
+        <span class="more">查看院系档案 →</span>
+      </div>
+      <div class="dept rv" onclick="openDept('yanling')">
+        <div class="no">DEPT. IX</div>
+        <h5>言灵研究（内部课程）</h5>
+        <p>不出现在任何公开课表上。关于龙族语言的力量——言灵——的开发与控制训练，仅对通过评定的学生开放。</p>
+        <span class="more">查看院系档案 →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ORGANIZATIONS ================= -->
+<section class="block alt" id="organizations">
+  <div class="wrap">
+    <div class="secHead rv">
+      <div class="kicker">ORGANIZATIONS</div>
+      <h3>组织机构</h3>
+      <div class="rule"></div>
+    </div>
+    <div class="orgList">
+      <div class="org rv" onclick="openOrg('exec')">
+        <div class="name">
+          <h5>执行部</h5>
+          <div class="en2">EXECUTION BUREAU</div>
+        </div>
+        <p>
+          学院最重要的行动机构，也是大多数毕业生的去向。执行部在全世界范围内执行与龙族相关的任务，
+          任务按危险程度划分为 <em>D · C · B · A · S · SS</em> 六级。每一份任务档案的结尾，都写着同一句话：愿你平安归来。
+        </p>
+        <span class="more">查看机构档案 →</span>
+      </div>
+      <div class="org rv" onclick="openOrg('gear')">
+        <div class="name">
+          <h5>装备部</h5>
+          <div class="en2">WERKSTATT ALCHEMIE</div>
+        </div>
+        <p>
+          全称「炼金术与科学工程应用研究所」，自称<em>瓦特阿尔海姆</em>。他们不做纸上谈兵的理论，
+          只专注一件事：把古老炼金术与现代工艺熔于一炉，铸造足以屠龙的兵器。
+        </p>
+        <span class="more">查看机构档案 →</span>
+      </div>
+      <div class="org rv" onclick="openOrg('lion')">
+        <div class="name">
+          <h5>狮心会</h5>
+          <div class="en2">SOCIETY OF LIONHEART</div>
+        </div>
+        <p>
+          源于秘党最古老的核心机构，如今以学生社团的形态延续。狮心会成员以纪律、荣誉与沉默著称，
+          是学院精神最锋利的一面。它的会徽是一头狮子——因为狮子的心脏，从不畏惧。
+        </p>
+        <span class="more">查看机构档案 →</span>
+      </div>
+      <div class="org rv" onclick="openOrg('union')">
+        <div class="name">
+          <h5>学生会</h5>
+          <div class="en2">STUDENT UNION</div>
+        </div>
+        <p>
+          学院学生自治机构，负责校园事务、社团管理与年度庆典，与狮心会之间保持着微妙的竞争传统。
+          学生会主席之位，历来是学院风云人物的角力场。
+        </p>
+        <span class="more">查看机构档案 →</span>
+      </div>
+      <div class="org rv" onclick="openOrg('norma')">
+        <div class="name">
+          <h5>诺玛</h5>
+          <div class="en2">NORMA · MAINFRAME</div>
+        </div>
+        <p>
+          学院的人工智能超级计算机中枢，由信息系维护。诺玛掌管学生档案、血统评级与全球监测网络，
+          以温和的女声回答每一个问题——尽管她知道的，永远比她说出的多。
+        </p>
+        <span class="more">查看机构档案 →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRINCIPAL ================= -->
+<section class="block" id="principal">
+  <div class="wrap">
+    <div class="secHead rv">
+      <div class="kicker">FROM THE PRINCIPAL</div>
+      <h3>校长致辞</h3>
+      <div class="rule"></div>
+    </div>
+    <div class="speech rv">
+      <span class="qmark">“</span>
+      <blockquote>
+        你们中的每一个人，都曾在某个夜晚觉得自己是孤独的怪物——
+        与人群格格不入，被血液里的火焰灼烧。<br>
+        但从你踏进这扇校门起，那样的夜晚结束了。<br>
+        这里的每一块砖石都为你们而砌，每一盏灯都为你们而亮。<br>
+        <b>怪物们，欢迎回家。</b>
+      </blockquote>
+      <div class="sign">
+        卡塞尔学院校长<br>
+        <b>希尔伯特 · 让 · 昂热</b><br>
+        <span class="en" style="font-size:11px;">HILBERT JEAN ANJOU</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ADMISSION ================= -->
+<section class="block alt" id="admission">
+  <div class="wrap">
+    <div class="secHead rv">
+      <div class="kicker">ADMISSION</div>
+      <h3>招生事务</h3>
+      <div class="rule"></div>
+    </div>
+    <div class="admGrid">
+      <div class="adm rv">
+        <div class="step"><span>I</span></div>
+        <h5>甄别与邀约</h5>
+        <p>卡塞尔学院不接受任何形式的自主报名。学院通过全球监测网络甄别具有龙族血统的少年，并由资深干事亲自登门递交入学邀请。</p>
+      </div>
+      <div class="adm rv">
+        <div class="step"><span>II</span></div>
+        <h5>3E 入学评定</h5>
+        <p>受邀者须接受学院的 3E 测试，从血统浓度、精神强度与综合素养三个维度进行评定，评级由低至高为 C · B · A · S 级。</p>
+      </div>
+      <div class="adm rv">
+        <div class="step"><span>III</span></div>
+        <h5>入学与誓言</h5>
+        <p>通过评定者将获得全额奖学金与终身档案编号，在开学典礼上与全体新生一同宣读校训——自此，你不再独行。</p>
+      </div>
+    </div>
+    <div class="notice rv">
+      <b>招生办公室谨启：</b>本院全体在校生均享全额奖学金待遇，衣食住行皆由学院承担。<br>
+      若您从未收到过我们的信函，请相信——那是一种幸运。愿您安度平凡而幸福的一生。
+    </div>
+    <div class="rv" style="text-align:center;margin-top:36px;">
+      <button class="btnMain" style="width:auto;padding:14px 56px;" onclick="openAuth('register')">注 册 学 籍 · ENROLL NOW</button>
+      <div style="font-size:11.5px;color:var(--ink-soft);letter-spacing:.2em;margin-top:12px;" class="en">RECEIVE YOUR 3E EVALUATION &amp; STUDENT ID</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NIGHTWATCH BBS ================= -->
+<section id="nightwatch">
+  <div class="wrap">
+    <div class="secHead rv">
+      <div class="kicker">NIGHTWATCHER BBS</div>
+      <h3>守夜人专区</h3>
+      <div class="rule"></div>
+    </div>
+    <div class="nwBar rv">
+      <span><span class="dot">●</span>　守夜人讨论区 · 卡塞尔学院官方匿名社区</span>
+      <span class="en" style="font-size:10.5px;">WE WATCH THROUGH THE NIGHT · 在线守夜人 <b id="nwOnline">347</b></span>
+    </div>
+    <div id="nwList" class="rv">
+      <div class="nwPost">
+        <span class="nwTag pin">置顶 · 公告</span>
+        <div>
+          <div class="tt">【执行部】三峡青铜城任务档案部分解封，B 级以上权限者可至诺玛终端查阅</div>
+          <div class="meta">发帖人 <b>校内广播之声</b> · 官方认证 · 3 天前</div>
+        </div>
+        <div class="re"><b>892</b>回复</div>
+      </div>
+      <div class="nwPost">
+        <span class="nwTag hot">热议 · 博彩</span>
+        <div>
+          <div class="tt">开盘！本届"自由一日"总决战：学生会 vs 狮心会，当前赔率 1 : 3.5，买定离手</div>
+          <div class="meta">发帖人 <b>不愿透露姓名的地下庄家 F</b> · 血统 C 级 · 6 小时前</div>
+        </div>
+        <div class="re"><b>2041</b>回复</div>
+      </div>
+      <div class="nwPost">
+        <span class="nwTag">悬赏</span>
+        <div>
+          <div class="tt">悬赏 500 学分：寻上周五深夜在图书馆顶层演奏大提琴的人，只想请你喝杯咖啡</div>
+          <div class="meta">发帖人 <b>Cello_Listener</b> · 血统 B 级 · 昨天 23:41</div>
+        </div>
+        <div class="re"><b>156</b>回复</div>
+      </div>
+      <div class="nwPost">
+        <span class="nwTag">情报</span>
+        <div>
+          <div class="tt">芝加哥市区检测到微弱死侍反应，执行部已派遣小队，近期请勿擅自离校</div>
+          <div class="meta">发帖人 <b>值夜的学长</b> · 血统 A 级 · 昨天 20:07</div>
+        </div>
+        <div class="re"><b>433</b>回复</div>
+      </div>
+      <div class="nwPost">
+        <span class="nwTag">八卦</span>
+        <div>
+          <div class="tt">有人看见校长办公室凌晨还亮着灯，昂热校长到底睡不睡觉？在线等，挺急的</div>
+          <div class="meta">发帖人 <b>好奇心过剩的新生</b> · 血统 C 级 · 昨天 18:22</div>
+        </div>
+        <div class="re"><b>677</b>回复</div>
+      </div>
+      <div class="nwPost">
+        <span class="nwTag">闲聊</span>
+        <div>
+          <div class="tt">食堂新来的川菜师傅是隐藏的 S 级吧？那盘回锅肉让我想家了（附泪目.jpg）</div>
+          <div class="meta">发帖人 <b>吃遍卡塞尔</b> · 血统 B 级 · 前天 12:03</div>
+        </div>
+        <div class="re"><b>521</b>回复</div>
+      </div>
+    </div>
+    <div class="nwCompose rv">
+      <label>POST AS NIGHTWATCHER · 以守夜人身份发言</label>
+      <textarea id="nwText" placeholder="夜色漫长，说点什么吧……（发言将以你的学籍身份署名）"></textarea>
+      <div class="row">
+        <span class="hint" id="nwHint">发言需持有效学籍 · 请先登录或注册</span>
+        <button class="nwBtn" id="nwSubmit" onclick="nwPost()">发 布</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div class="brand">
+        <svg width="48" height="48" aria-hidden="true" style="--c1:#c4a96a;--c2:#c4a96a;">
+          <use href="#crestTree"/>
+        </svg>
+        <div class="txt">
+          <h6>卡塞尔学院</h6>
+          <p>
+            伊利诺伊州 · 芝加哥远郊<br>
+            与龙族势不两立<br>
+            <span class="en" style="font-size:10.5px;">CASSELL COLLEGE — WE STAND AGAINST THE DRAGON</span>
+          </p>
+        </div>
+      </div>
+      <div>
+        <h6>快速通道</h6>
+        <ul>
+          <li><a href="#about">学院概况</a></li>
+          <li><a href="#departments">院系设置</a></li>
+          <li><a href="#organizations">组织机构</a></li>
+          <li><a href="#admission">招生事务</a></li>
+          <li><a href="#nightwatch">守夜人专区</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6>校内系统</h6>
+        <ul>
+          <li><a href="#">诺玛 · 学生档案</a></li>
+          <li><a href="#">执行部 · 任务公示</a></li>
+          <li><a href="#">图书馆 · 古籍库</a></li>
+          <li><a href="#">装备部 · 申领窗口</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">
+      本页面为《龙族》小说粉丝创作，卡塞尔学院及相关设定版权归原作者江南所有。<br>
+      <span class="en">FAN-MADE TRIBUTE · NOT AN OFFICIAL WEBSITE · SECRETUM SANGUIS GLADIUS</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= DEPT DETAIL MODAL ================= -->
+<div class="modalMask" id="deptMask" onclick="if(event.target===this)closeDept()">
+  <div class="deptModal" id="deptModalBox">
+    <button class="close" onclick="closeDept()">×</button>
+    <div class="dHead">
+      <div class="dNo" id="dmNo"></div>
+      <h4 id="dmName"></h4>
+      <div class="dEn" id="dmEn"></div>
+      <div class="dMotto" id="dmMotto"></div>
+    </div>
+    <div class="dBody" id="dmBody"></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<!-- ================= AUTH MODAL ================= -->
+<div class="modalMask" id="authMask" onclick="if(event.target===this)closeAuth()">
+  <div class="modal">
+    <button class="close" onclick="closeAuth()">×</button>
+    <div class="mCrest">
+      <svg width="46" height="46" style="--c1:#7a1f23;--c2:#a8873d;"><use href="#crestTree"/></svg>
+    </div>
+    <h4 id="mTitle">学籍系统</h4>
+    <div class="mSub">NORMA · STUDENT REGISTRY SYSTEM</div>
+
+    <div id="authForms">
+      <div class="authTabs">
+        <button id="tabLogin" onclick="switchTab('login')">登录 LOGIN</button>
+        <button id="tabReg" onclick="switchTab('register')">注册学籍 ENROLL</button>
+      </div>
+
+      <!-- login -->
+      <div id="paneLogin">
+        <div class="fld">
+          <label>EMAIL · 通讯邮箱</label>
+          <input type="email" id="liEmail" placeholder="name@example.com" autocomplete="off">
+        </div>
+        <div class="fld">
+          <label>PASSWORD · 通行密语</label>
+          <input type="password" id="liPass" placeholder="••••••••">
+        </div>
+        <button class="btnMain" onclick="doLogin()">进 入 学 院</button>
+        <div class="authMsg" id="liMsg"></div>
+      </div>
+
+      <!-- register -->
+      <div id="paneReg" style="display:none;">
+        <div class="fld">
+          <label>FULL NAME · 姓名</label>
+          <input type="text" id="rgName" placeholder="您的真实姓名或代号" autocomplete="off">
+        </div>
+        <div class="fld">
+          <label>EMAIL · 通讯邮箱</label>
+          <input type="email" id="rgEmail" placeholder="name@example.com" autocomplete="off">
+        </div>
+        <div class="fld">
+          <label>PASSWORD · 通行密语</label>
+          <input type="password" id="rgPass" placeholder="至少 6 位">
+        </div>
+        <div class="fld">
+          <label>INTENDED DEPARTMENT · 意向院系</label>
+          <select id="rgDept">
+            <option>龙族历史系 · Dragon History</option>
+            <option>炼金系 · Alchemy</option>
+            <option>机械系 · Mechanical Engineering</option>
+            <option>格斗系 · Combat</option>
+            <option>信息系 · Information Science</option>
+            <option>新闻系 · Journalism</option>
+            <option>数学系 · Mathematics</option>
+            <option>物理系 · Physics</option>
+            <option>航空航天工程学部 · Aerospace</option>
+          </select>
+        </div>
+        <button class="btnMain" onclick="doRegister()">提 交 · 接 受 3E 评 定</button>
+        <div class="authMsg" id="rgMsg"></div>
+        <div class="authOath">
+          提交即视为宣誓遵守学院保密条例<br>
+          <span class="en" style="font-size:9.5px;">BY ENROLLING YOU SWEAR THE OATH OF SECRECY</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- norma evaluating -->
+    <div id="evalPane" class="evalBox" style="display:none;">
+      <div class="evLine" id="evLine">正在接入诺玛……</div>
+      <div class="bar"><i id="evBar"></i></div>
+    </div>
+
+    <!-- id card / profile -->
+    <div id="idPane" class="idCard" style="display:none;">
+      <div class="welcome" id="idWelcome">ENROLLMENT COMPLETE · 评定完成</div>
+      <div class="stName" id="idName"></div>
+      <div class="stNo" id="idNo"></div>
+      <div class="rankBox">
+        <div class="r" id="idRank"></div>
+        <div class="rl">BLOODLINE RANK · 血统评级</div>
+      </div>
+      <div class="rows">
+        <div><span>DEPARTMENT · 院系</span><b id="idDept"></b></div>
+        <div><span>STATUS · 状态</span><b>在册 ENROLLED</b></div>
+        <div><span>SCHOLARSHIP · 奖学金</span><b>全额 FULL</b></div>
+        <div><span>CLEARANCE · 权限</span><b id="idClear"></b></div>
+      </div>
+      <div class="oathLine" id="idOath">
+        这里的每一盏灯都为你而亮。<br><b>怪物，欢迎回家。</b>
+      </div>
+      <button class="btnMain" onclick="closeAuth()">开 始 你 的 学 院 生 活</button>
+      <div class="authMsg"><a href="javascript:void(0)" onclick="doLogout()" style="text-decoration:underline;cursor:pointer;">注销登录 SIGN OUT</a></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target);} });
+},{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* ================= NORMA · student registry ================= */
+const DB_KEY='cassell_users', SS_KEY='cassell_session';
+const load=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
+const save=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+const users=()=>load(DB_KEY)||{};
+
+function openAuth(tab){
+  document.getElementById('authMask').classList.add('open');
+  const cur=load(SS_KEY);
+  if(cur && users()[cur]){ showProfile(users()[cur]); }
+  else{ showForms(); switchTab(tab||'login'); }
+}
+function closeAuth(){ document.getElementById('authMask').classList.remove('open'); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){closeAuth(); if(typeof closeDept==='function')closeDept();} });
+
+function showForms(){
+  document.getElementById('authForms').style.display='';
+  document.getElementById('evalPane').style.display='none';
+  document.getElementById('idPane').style.display='none';
+  document.getElementById('mTitle').textContent='学籍系统';
+}
+function switchTab(t){
+  const L=t==='login';
+  document.getElementById('paneLogin').style.display=L?'':'none';
+  document.getElementById('paneReg').style.display=L?'none':'';
+  document.getElementById('tabLogin').classList.toggle('act',L);
+  document.getElementById('tabReg').classList.toggle('act',!L);
+  document.getElementById('liMsg').textContent='';
+  document.getElementById('rgMsg').textContent='';
+}
+
+function doRegister(){
+  const name=document.getElementById('rgName').value.trim();
+  const email=document.getElementById('rgEmail').value.trim().toLowerCase();
+  const pass=document.getElementById('rgPass').value;
+  const dept=document.getElementById('rgDept').value;
+  const msg=document.getElementById('rgMsg');
+  if(!name){msg.textContent='请填写姓名。';return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.textContent='请填写有效的通讯邮箱。';return;}
+  if(pass.length<6){msg.textContent='通行密语至少需要 6 位。';return;}
+  const db=users();
+  if(db[email]){msg.textContent='该邮箱已在诺玛档案中登记，请直接登录。';return;}
+
+  // NORMA 3E evaluation (weighted random rank)
+  const roll=Math.random();
+  const rank= roll<0.03?'S' : roll<0.18?'A' : roll<0.55?'B' : 'C';
+  const clear={S:'S-3 · 核心档案',A:'A-2 · 高阶档案',B:'B-1 · 常规档案',C:'C-1 · 常规档案'}[rank];
+  const no='CC-'+new Date().getFullYear()+'-'+String(Math.floor(1000+Math.random()*9000));
+  const user={name,email,pass,dept,rank,clear,no,joined:new Date().toISOString().slice(0,10)};
+
+  // evaluation sequence
+  document.getElementById('authForms').style.display='none';
+  document.getElementById('evalPane').style.display='';
+  document.getElementById('mTitle').textContent='3E 评 定';
+  const lines=['正在接入诺玛 NORMA ……','采集血统样本 · Bloodline Sampling ……','精神强度测试 · EEG Analysis ……','综合素养评估 · Evaluation ……','评定完成。正在签发学籍档案……'];
+  const evLine=document.getElementById('evLine'), evBar=document.getElementById('evBar');
+  let i=0; evBar.style.width='0';
+  const timer=setInterval(()=>{
+    evLine.textContent=lines[i];
+    evBar.style.width=((i+1)/lines.length*100)+'%';
+    i++;
+    if(i>=lines.length){
+      clearInterval(timer);
+      setTimeout(()=>{
+        db[email]=user; save(DB_KEY,db); save(SS_KEY,email);
+        showProfile(user,true); refreshTopbar();
+        if(typeof refreshRegStat==='function')refreshRegStat();
+      },700);
+    }
+  },850);
+}
+
+function doLogin(){
+  const email=document.getElementById('liEmail').value.trim().toLowerCase();
+  const pass=document.getElementById('liPass').value;
+  const msg=document.getElementById('liMsg');
+  const u=users()[email];
+  if(!u){msg.textContent='诺玛档案中查无此人，请先注册学籍。';return;}
+  if(u.pass!==pass){msg.textContent='通行密语错误。';return;}
+  save(SS_KEY,email);
+  showProfile(u); refreshTopbar();
+}
+
+function showProfile(u,isNew){
+  document.getElementById('authForms').style.display='none';
+  document.getElementById('evalPane').style.display='none';
+  document.getElementById('idPane').style.display='';
+  document.getElementById('mTitle').textContent=isNew?'入 学 通 知':'学 生 档 案';
+  document.getElementById('idWelcome').textContent=isNew?'ENROLLMENT COMPLETE · 评定完成':'STUDENT PROFILE · 在册学生';
+  document.getElementById('idName').textContent=u.name;
+  document.getElementById('idNo').textContent=u.no+' · SINCE '+u.joined;
+  document.getElementById('idRank').textContent=u.rank;
+  document.getElementById('idDept').textContent=u.dept.split(' · ')[0];
+  document.getElementById('idClear').textContent=u.clear;
+  document.getElementById('idOath').innerHTML= isNew
+    ? '这里的每一盏灯都为你而亮。<br><b>怪物，欢迎回家。</b>'
+    : '欢迎回来，'+u.name+'。<br><b>愿你平安归来。</b>';
+}
+
+function doLogout(){
+  localStorage.removeItem(SS_KEY);
+  refreshTopbar(); showForms(); switchTab('login');
+}
+
+function refreshTopbar(){
+  const cur=load(SS_KEY), u=cur?users()[cur]:null;
+  document.getElementById('topbarUser').innerHTML = u
+    ? '<a href="javascript:void(0)" onclick="openAuth()" class="authLink"><b>'+u.no+'</b> · '+u.name+' · 血统 '+u.rank+' 级</a><span class="sep">|</span><a href="javascript:void(0)" onclick="doLogout()" class="authLink">SIGN OUT · 注销</a>'
+    : '<a href="javascript:void(0)" onclick="openAuth(\'login\')" class="authLink">STUDENT LOGIN · 学生登录</a><span class="sep">|</span><a href="javascript:void(0)" onclick="openAuth(\'register\')" class="authLink">ENROLL · 注册学籍</a>';
+}
+refreshTopbar();
+
+/* ================= stats counters ================= */
+const REG_BASE=286; // 本届已登记基数
+function regCount(){ return REG_BASE + Object.keys(users()).length; }
+function animateNum(el,target){
+  const dur=1600, t0=performance.now();
+  (function step(t){
+    const p=Math.min((t-t0)/dur,1), ease=1-Math.pow(1-p,3);
+    el.textContent=Math.round(target*ease).toLocaleString('en-US');
+    if(p<1)requestAnimationFrame(step);
+  })(t0);
+}
+const statsIO=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    statsIO.unobserve(e.target);
+    e.target.querySelectorAll('[data-count]').forEach(el=>animateNum(el,+el.dataset.count));
+    animateNum(document.getElementById('statReg'),regCount());
+  });
+},{threshold:.3});
+statsIO.observe(document.querySelector('.stats'));
+function refreshRegStat(){ document.getElementById('statReg').textContent=regCount().toLocaleString('en-US'); }
+
+/* ================= smooth chrome：进度条 / 返回顶部 / 导航高亮 ================= */
+const progEl=document.getElementById('progress'), topBtn=document.getElementById('toTop');
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const p=h.scrollTop/(h.scrollHeight-h.clientHeight);
+  progEl.style.width=(p*100)+'%';
+  topBtn.classList.toggle('show',h.scrollTop>600);
+},{passive:true});
+
+const navLinks=[...document.querySelectorAll('nav.main a')];
+const spy=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const id='#'+e.target.id;
+    navLinks.forEach(a=>a.classList.toggle('cur',a.getAttribute('href')===id));
+  });
+},{rootMargin:'-30% 0px -60% 0px'});
+document.querySelectorAll('section[id]').forEach(s=>spy.observe(s));
+
+/* ================= 守夜人讨论区 ================= */
+const NW_KEY='cassell_posts';
+function nwUser(){ const cur=load(SS_KEY); return cur?users()[cur]:null; }
+function nwRefreshHint(){
+  const u=nwUser(), hint=document.getElementById('nwHint');
+  if(!hint)return;
+  hint.innerHTML=u
+    ? '当前身份：<b style="color:var(--gold-soft)">'+u.name+'</b> · '+u.no+' · 血统 '+u.rank+' 级'
+    : '发言需持有效学籍 · <a href="javascript:void(0)" onclick="openAuth(\'login\')" style="text-decoration:underline;color:var(--gold-soft)">请先登录或注册</a>';
+}
+function nwRender(){
+  const list=document.getElementById('nwList');
+  if(!list)return;
+  list.querySelectorAll('.nwPost.user').forEach(el=>el.remove());
+  const posts=load(NW_KEY)||[];
+  const pin=list.querySelector('.nwPost'); // 置顶帖
+  posts.slice().reverse().forEach(p=>{
+    const div=document.createElement('div');
+    div.className='nwPost user';
+    div.innerHTML='<span class="nwTag hot">新帖</span><div><div class="tt"></div>'+
+      '<div class="meta">发帖人 <b></b> · 血统 '+p.rank+' 级 · '+p.time+'</div></div>'+
+      '<div class="re"><b>0</b>回复</div>';
+    div.querySelector('.tt').textContent=p.text;
+    div.querySelector('.meta b').textContent=p.author;
+    pin.after(div);
+  });
+}
+function nwPost(){
+  const u=nwUser();
+  if(!u){ openAuth('login'); return; }
+  const ta=document.getElementById('nwText');
+  const text=ta.value.trim();
+  if(!text)return;
+  const posts=load(NW_KEY)||[];
+  posts.push({text,author:u.name,rank:u.rank,time:new Date().toLocaleString('zh-CN',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'})});
+  save(NW_KEY,posts);
+  ta.value='';
+  nwRender();
+}
+/* ================= 院系档案 ================= */
+const DEPTS={
+alchemy:{no:'DEPT. II',name:'炼 金 系',en:'DEPARTMENT OF ALCHEMY',motto:'万 物 皆 可 熔 铸 ，唯 誓 言 不 灭',
+ intro:['炼金系是卡塞尔学院最古老的院系之一，也是学院「古老传承与现代科学并行」精神最典型的体现。在这里，中世纪炼金术士的手稿与质谱仪、电子显微镜共处一室：学生上午还在研读拉丁文的《翠玉录》抄本，下午就要进无尘实验室分析龙血样本的分子结构。','本系与装备部（瓦特阿尔海姆）关系最为紧密——装备部全称即「炼金术与科学工程应用研究所」，其核心成员几乎全部出身炼金系。可以说，执行部专员手中的每一件屠龙兵器，都流着炼金系的血。'],
+ hist:['炼金系的源头可以追溯到中世纪欧洲的炼金术士行会。当屠龙世家在战场上挥剑时，行会的学者们在坩埚与羊皮纸间寻找另一条路：用龙的血与鳞，铸造杀死龙的武器。这批学者后来整体并入秘党，成为其技术中枢。','学院建校时，行会传承正式改制为炼金系。数百年积累的手稿、配方与失败记录被完整移入学院地下档案库——其中一部分至今仍被列为<em>S 级机密</em>，只有系主任与校长持有调阅权限。'],
+ goal:'本系旨在培养兼通古典炼金学理与现代材料科学的复合型屠龙技术人才。主要研究与就业方向：',
+ tags:['龙血与逆鳞材料研究','炼金武器铸造与维护','言灵催化媒介开发','战地药剂与急救制剂','装备部（瓦特阿尔海姆）','执行部技术支援岗'],
+ courses:[
+  ['<b>炼金化学</b><br><small>必修 · 全学年</small>','霍恩海姆教授<br><small>系主任 · 血统 A 级</small>','周一 / 周四<br>09:00–11:30','炼金楼 B2<br>大实验室'],
+  ['<b>古典炼金术史</b><br><small>必修 · 上学期</small>','格雷戈里·「灰袍」老师<br><small>档案库首席研究员</small>','周二<br>14:00–16:00','图书馆<br>古籍阅览厅'],
+  ['<b>龙血材料学</b><br><small>必修 · 下学期</small>','霍恩海姆教授<br><small>＋装备部客座讲师</small>','周三<br>09:00–12:00','炼金楼 B3<br>恒温样本室'],
+  ['<b>魔动机械设计学</b><br><small>选修 · 与机械系合开</small>','赫利俄斯工程师<br><small>装备部现役</small>','周五<br>13:30–17:00','装备部<br>一号工坊'],
+  ['<b>药剂学与战地急救</b><br><small>选修</small>','玛尔戈医生<br><small>校医院驻系导师</small>','周二<br>19:00–21:00','校医院<br>教学诊室'],
+  ['<b>言灵催化媒介研究</b><br><small>高年级选修 · 内部课程</small>','——<small>（保密）</small>','另行通知','地下三层<br><small>需 A 级以上权限</small>']],
+ note:'<b>修课提示：</b>进入 B2 以下楼层须佩戴系徽与防护手环；《龙血材料学》实验期间禁止佩戴任何银制饰品；学期末的「坩埚之夜」为本系传统结业仪式，全体新生须在导师见证下完成个人第一件炼金制品。'},
+
+history:{no:'DEPT. I',name:'龙 族 历 史 系',en:'DEPARTMENT OF DRACONIC HISTORY',motto:'铭 记 ，是 为 了 终 结',
+ intro:['龙族历史系是卡塞尔学院的立校之本。屠龙首先要认识龙——本系研究龙族的谱系、纪年、习性与遗迹，释读青铜与火焰时代留下的铭文，为全院一切研究与行动提供知识根基。','系馆与学院图书馆、地下档案库直接相通。这里的学生大概是全院唯一以「泡图书馆」为正课的人：一份准确的谱系考据，在战场上抵得过一支火力小队。'],
+ hist:['本系传承自秘党的编年史官。数百年来，每一次屠龙战役、每一位殒落的屠龙者、每一条被终结的龙的名字，都由史官们以手抄本形式记录并封存。','建校时，这批浩如烟海的手稿构成了学院图书馆最早的馆藏，史官传承也随之改制为龙族历史系——学院编号第一的院系。'],
+ goal:'本系培养精通龙族学理与古代语言的研究型人才。主要研究与就业方向：',
+ tags:['龙族谱系考据','青铜与火焰时代铭文释读','遗迹田野调查','执行部情报分析岗','图书馆与档案库','各国分部研究职位'],
+ courses:[
+  ['<b>龙族谱系学</b><br><small>必修 · 全学年</small>','舒尔茨教授<br><small>系主任</small>','周一 / 周三<br>10:00–12:00','图书馆<br>东翼讲堂'],
+  ['<b>古诺尔斯语</b><br><small>必修 · 全学年</small>','曼德先生<br><small>人称「羊皮纸」</small>','周二 / 周五<br>08:30–10:00','文史楼 204'],
+  ['<b>世界史 · 隐秘卷</b><br><small>必修 · 上学期</small>','昂热校长<br><small>亲自授课 · 每年仅开一轮</small>','周四<br>16:00–18:00','大礼堂'],
+  ['<b>青铜时代铭文释读</b><br><small>选修</small>','舒尔茨教授','周五<br>14:00–16:00','地下档案库<br>阅览区'],
+  ['<b>田野考古与遗迹勘察</b><br><small>暑期实践 · 外派</small>','随队导师','暑期 6 周','全球考察点'],
+  ['<b>龙类行为学</b><br><small>选修 · 与格斗系合开</small>','执行部退役专员','周三<br>19:00–21:00','格斗馆<br>研讨室']],
+ note:'<b>修课提示：</b>档案库文献按血统权限分级借阅；《世界史·隐秘卷》期末为昂热校长一对一口试，历届学生称之为「全学院最温和也最可怕的考试」。'},
+
+mech:{no:'DEPT. III',name:'机 械 系',en:'DEPARTMENT OF MECHANICAL ENGINEERING',motto:'齿 轮 咬 合 之 处 ，即 是 秩 序',
+ intro:['机械系负责屠龙装备的结构设计与制造工艺。从执行部专员腰间的折叠弩，到装备部工坊里的重型武装平台，每一张图纸都出自机械系的绘图桌。','本系学生的日常是画图、加工、装配、测试、炸掉、再画图。学院里流传一句话：想认识机械系的人，去医务室或者一号工坊，总有一个地方能找到。'],
+ hist:['机械系的前身是工业革命时期秘党设于鲁尔区的地下兵工坊。蒸汽与钢铁的时代给了屠龙者新的武器，也给了他们新的学科。','兵工坊在两次大战中数度迁移，最终随秘党改制整体迁入学院，与炼金系比邻而居——一个负责材料，一个负责结构，合称「瓦特阿尔海姆的左右手」。'],
+ goal:'本系培养武器结构与精密制造方向的工程人才。主要研究与就业方向：',
+ tags:['屠龙兵器结构设计','精密机关与传动','载具改装','装备部工坊岗','执行部装备保障'],
+ courses:[
+  ['<b>机构学与武器结构</b><br><small>必修 · 全学年</small>','克虏伯教授<br><small>系主任</small>','周一 / 周四<br>08:30–11:00','工程楼 301'],
+  ['<b>魔动机械设计学</b><br><small>必修 · 与炼金系合开</small>','赫利俄斯工程师<br><small>装备部现役</small>','周五<br>13:30–17:00','装备部<br>一号工坊'],
+  ['<b>金属加工实习</b><br><small>必修 · 上学期</small>','工坊导师组','周三<br>13:00–17:00','一号工坊'],
+  ['<b>载具工程</b><br><small>选修 · 与航空航天学部合开</small>','学部联合讲师','周二<br>14:00–16:30','车库实验场'],
+  ['<b>爆破工程基础</b><br><small>选修 · 需执行部备案</small>','「雷管」奥托先生','周六<br>09:00–12:00','远郊试验场']],
+ note:'<b>修课提示：</b>进入工坊须着阻燃工装；私自改装宿舍电器按系规记过（历史上机械系宿舍的咖啡机曾达到 11 个大气压）；年度「铁匠之夜」优胜作品将被装备部正式列装。'},
+
+combat:{no:'DEPT. IV',name:'格 斗 系',en:'DEPARTMENT OF COMBAT',motto:'剑 锋 所 指 ，心 之 所 向',
+ intro:['格斗系锤炼的是混血种最后的依靠：身体与意志。言灵会失效，装备会损坏，血统会枯竭——在那样的时刻，能救你的只有千万次重复过的动作。','本系课程横跨东西方武学：西洋剑术、战术射击、近身格斗，以及一门所有新生都想不通为什么要上、毕业时都感谢自己上过的《太极》。'],
+ hist:['格斗系是屠龙世家武学传承的直系后裔。卡塞尔家族的双手剑术、加图索家族的枪术、诸多已消亡家族的独门技艺，都以课程的形式在这里延续。','对格斗系而言，每一套动作都是一份遗产——教剑的人会告诉你这一式的名字，以及最后一个用它杀死过龙的人的名字。'],
+ goal:'本系培养一线战斗与战术指挥人才，是执行部专员的最大生源。主要方向：',
+ tags:['近身格斗','冷兵器 · 剑术','战术射击','小队协同战术','执行部一线专员','狮心会（选拔制）'],
+ courses:[
+  ['<b>体能锤炼</b><br><small>必修 · 每日</small>','轮值教官','每日<br>06:00–07:30','环湖跑道 / 格斗馆'],
+  ['<b>西洋剑术</b><br><small>必修 · 全学年</small>','洛伦佐大师<br><small>系主任 · 剑术世家末裔</small>','周一 / 周三<br>14:00–16:30','格斗馆<br>剑道厅'],
+  ['<b>太极</b><br><small>必修 · 全学年</small>','王老师<br><small>外聘 · 深藏不露</small>','周二 / 周五<br>06:30–08:00','后山<br>松林平台'],
+  ['<b>战术射击</b><br><small>必修 · 下学期</small>','执行部教官组','周四<br>13:00–16:00','地下靶场'],
+  ['<b>小队协同战术</b><br><small>高年级必修</small>','执行部现役专员','周六<br>08:00–12:00','远郊演习场']],
+ note:'<b>修课提示：</b>晨训六点整点名，风雨无阻，迟到者加练环湖十圈；学年实战考核的陪练可能来自狮心会——祝你好运。'},
+
+info:{no:'DEPT. V',name:'信 息 系',en:'DEPARTMENT OF INFORMATION SCIENCE',motto:'世 界 在 数 据 中 低 语',
+ intro:['信息系是学院的神经中枢。全球各地的异常数据——地震波形、金融波动、社交网络上的一句疯话——都在这里被采集、清洗、比对，其中可能藏着龙族苏醒的征兆。','本系最重要的职责是维护学院中枢「诺玛」。与其说学生在学习操作她，不如说是在学习如何与一位知道太多的女士体面地共事。'],
+ hist:['信息系是全院最年轻的系，前身是档案科。二十世纪中叶，秘党意识到情报的载体正从羊皮纸变为磁带与磁盘，档案科随之改组。','「诺玛」上线后，信息系正式独立建系，并接管了学生档案、血统评级与全球监测网络三大核心系统。'],
+ goal:'本系培养情报分析与系统维护方向的技术人才。主要方向：',
+ tags:['诺玛系统维护','全球异常监测','情报分析','密码学','学生档案管理','各国分部技术岗'],
+ courses:[
+  ['<b>计算机科学基础</b><br><small>必修 · 全学年</small>','图灵讲席教授组','周一 / 周三<br>08:30–10:30','信息楼 101'],
+  ['<b>诺玛系统架构</b><br><small>必修 · 需签保密协议</small>','系主任<br><small>＋助教：诺玛（AI）</small>','周四<br>14:00–17:00','地下机房<br>观察廊'],
+  ['<b>密码学与古典密码</b><br><small>必修 · 上学期</small>','「渡鸦」女士','周二<br>10:00–12:00','信息楼 303'],
+  ['<b>信号情报分析</b><br><small>选修</small>','执行部情报科讲师','周五<br>14:00–16:00','监测中心<br>培训席'],
+  ['<b>数据库与档案管理</b><br><small>选修</small>','档案库导师组','周三<br>19:00–21:00','图书馆<br>数字阅览室']],
+ note:'<b>修课提示：</b>机房恒温 18℃，请自备外套；严禁向诺玛提出与课程无关的私人问题——她有问必答，并且永久记录。'},
+
+journal:{no:'DEPT. VI',name:'新 闻 系',en:'DEPARTMENT OF JOURNALISM',motto:'真 相 沉 在 墨 水 之 下',
+ intro:['在这个时代，掩盖一条真相和挖出一条真相同样困难，而新闻系两样都教。学生要学会从一百条公开报道的缝隙里认出龙族活动的影子，也要学会让一场「燃气爆炸」体面地登上头版。','新闻系毕业生持有全世界最好用的通行证：记者证。哪里有灾难，哪里就有记者——以及混在记者里的执行部专员。'],
+ hist:['大众传媒兴起后，秘党面临新的难题：屠龙战场不再有沉默的目击者。为执行「掩饰协议」，学院设立了新闻系。','数十年来，本系毕业生进入全球各大通讯社、报社与电视台。你读过的某些「自然灾害」报道，署名记者可能就坐在这间教室里。'],
+ goal:'本系培养舆情控制与深度调查方向的传媒人才。主要方向：',
+ tags:['舆情监测','掩饰协议执行','深度调查','危机公关','驻外记者（执行部掩护身份）'],
+ courses:[
+  ['<b>新闻写作</b><br><small>必修 · 全学年</small>','海明薇教授<br><small>系主任 · 前战地记者</small>','周一 / 周四<br>10:00–12:00','文史楼 401'],
+  ['<b>大众传播与掩饰协议</b><br><small>必修 · 内部课程</small>','执行部公关科讲师','周三<br>14:00–16:00','文史楼 405<br><small>需 B 级权限</small>'],
+  ['<b>深度调查方法</b><br><small>必修 · 下学期</small>','海明薇教授','周五<br>10:00–12:00','文史楼 401'],
+  ['<b>影像与暗房技术</b><br><small>选修</small>','「快门」老先生','周二<br>19:00–21:30','艺术楼<br>暗房'],
+  ['<b>危机公关实务</b><br><small>选修</small>','客座 · 各国分部轮讲','周六<br>10:00–12:00','视频会议室']],
+ note:'<b>修课提示：</b>《掩饰协议》课堂笔记不得带出教室；年度实训为「四十八小时压下一条假头条」，往届最好成绩是六小时。'},
+
+mathphys:{no:'DEPT. VII',name:'数 学 系 · 物 理 系',en:'DEPT. OF MATHEMATICS & PHYSICS',motto:'公 式 不 说 谎',
+ intro:['数学系与物理系合署办学，是学院一切研究的地基。言灵的作用边界、血统的遗传规律、龙类苏醒的周期模型——传说与直觉最终都要回到公式与实验中接受检验。','这里是全院挂科率最高的地方，也是奖学金加成最高的地方。学院的逻辑很简单：算得准的人，救得了命。'],
+ hist:['两系由散布欧洲各大学的混血学者组成。数百年里，他们白天在公开学界教书，夜里为秘党计算弹道、破译密码、修订龙历。','建校后，这批「白天的教授」终于有了可以公开真实研究方向的讲台——尽管讲义封面上的课名，依然写得像一门普通的自然科学。'],
+ goal:'两系培养理论研究与建模分析人才。主要方向：',
+ tags:['言灵能量建模','血统遗传统计','龙历与周期研究','诺玛算法组','公开学界（长期潜伏）'],
+ courses:[
+  ['<b>高等数学</b><br><small>必修 · 全学年</small>','高斯讲席教授','周一 / 周三 / 周五<br>08:00–09:30','理学楼 201'],
+  ['<b>理论物理</b><br><small>必修 · 全学年</small>','薛定谔讲席教授','周二 / 周四<br>10:00–12:00','理学楼 305'],
+  ['<b>统计遗传学</b><br><small>必修 · 下学期</small>','两系联合讲师组','周三<br>14:00–16:00','理学楼 210'],
+  ['<b>言灵能量学导论</b><br><small>高年级选修 · 内部课程</small>','——<small>（保密）</small>','另行通知','地下三层<br><small>需 A 级以上权限</small>'],
+  ['<b>数值模拟</b><br><small>选修 · 与信息系合开</small>','诺玛算法组','周五<br>14:00–17:00','信息楼<br>计算实验室']],
+ note:'<b>修课提示：</b>期中后设「补救周」，助教全天驻守理学楼；《言灵能量学导论》选课名单不公开，被选中者将收到诺玛的单独通知。'},
+
+aero:{no:'DEPT. VIII',name:'航 空 航 天 工 程 学 部',en:'SCHOOL OF AEROSPACE ENGINEERING',motto:'群 星 亦 在 守 望',
+ intro:['航空航天工程学部是学院规模最大的学部，也是卡塞尔对外的学术门面。学部与外界高校和研究机构保持着完全公开的合作，撑起了「古代爬行动物研究之外」的学术声誉。','而在公开论文之外，学部为执行部的全球任务提供飞行器与载具支持——专员们能在二十四小时内出现在世界任何角落，靠的是这里的机库。'],
+ hist:['学部设立于二战后。喷气时代的到来让秘党意识到：下一次龙族苏醒，战场可能横跨大洲，屠龙者需要翅膀。','数十年间，学部从一条借用的跑道发展为拥有独立机场、机库与两架远程运输机的完整建制，是学院现代化的象征。'],
+ goal:'学部培养飞行器工程与航空运用人才。主要方向：',
+ tags:['飞行器设计','卫星遥感与监测','任务载具支持','对外学术交流','执行部航空保障'],
+ courses:[
+  ['<b>空气动力学</b><br><small>必修 · 全学年</small>','莱特讲席教授<br><small>学部主任</small>','周一 / 周四<br>08:30–10:30','航空楼 101'],
+  ['<b>飞行器设计</b><br><small>必修 · 全学年</small>','学部设计组','周二<br>14:00–17:00','航空楼<br>设计中心'],
+  ['<b>轨道力学</b><br><small>必修 · 下学期</small>','联合讲师组','周三<br>10:00–12:00','航空楼 205'],
+  ['<b>卫星遥感与监测</b><br><small>选修 · 与信息系合开</small>','监测中心讲师','周五<br>10:00–12:00','监测中心'],
+  ['<b>飞行实习</b><br><small>高年级必修</small>','「老鹰」机长<br><small>执行部航空队</small>','周六<br>全天','学院机场']],
+ note:'<b>修课提示：</b>机场跑道每日 05:00–06:00 例行检修，晨跑请绕行；《飞行实习》结业标准为独立完成一次夜间起降——放心，「老鹰」机长会坐在副驾驶。'},
+
+yanling:{no:'DEPT. IX',name:'言 灵 研 究',en:'SPEECH SPIRIT STUDIES · CLASSIFIED',motto:'语 言 即 是 力 量',
+ intro:['这门课不出现在任何公开课表上。言灵——龙族的语言——是混血种血统深处沉睡的力量，也是学院最锋利、最危险的一把剑。','言灵研究不以「系」为建制：通过 3E 评定的学生将按血统等级分入不同训练序列，课程、导师与训练地点均为保密信息，按权限逐级开放。'],
+ hist:['言灵研究是秘党最古老也最忌讳的研究方向。历史上，因言灵失控而殒命的研究者不比死在龙爪下的屠龙者少。','正因如此，学院为它立下最严的规矩：所有训练必须在导师监护下进行，所有记录只存于诺玛，所有讲义在课后回收——每一页都以血起誓。'],
+ goal:'训练目标：让力量属于你，而不是你属于力量。训练序列方向：',
+ tags:['言灵控制训练','精神防护','高危言灵封存','执行部 S 级支援','（其余方向保密）'],
+ courses:[
+  ['<b>言灵学基础</b><br><small>通过 3E 评定者必修</small>','——<small>（面授时告知）</small>','按序列<br>另行通知','地下三层'],
+  ['<b>精神强度训练</b><br><small>必修</small>','校医院联合导师组','每周两次<br>时间保密','静默室'],
+  ['<b>古龙语音韵</b><br><small>选修 · 与龙族历史系合开</small>','曼德先生','周四<br>19:00–21:00','文史楼 204'],
+  ['<b>高阶言灵个别指导</b><br><small>S 级序列 · 一对一</small>','——<small>（保密）</small>','——','——']],
+ note:'<b>训练提示：</b>本页仅为可公开部分，完整课程信息存于诺玛，按血统权限显示；未经导师许可，严禁在任何场合独自尝试释放言灵——<b>这条规矩上一次被打破时，学院重建了半座图书馆。</b>'}
+};
+function openDept(id){
+  const d=DEPTS[id];
+  if(!d){deptSoon();return;}
+  document.getElementById('dmNo').textContent=d.no+' · CASSELL COLLEGE';
+  document.getElementById('dmName').textContent=d.name;
+  document.getElementById('dmEn').textContent=d.en;
+  document.getElementById('dmMotto').textContent=d.motto;
+  let h='';
+  h+='<div class="dSec"><h5>系 简 介</h5>'+d.intro.map(p=>'<p>'+p+'</p>').join('')+'</div>';
+  h+='<div class="dSec"><h5>历 史 沿 革</h5>'+d.hist.map(p=>'<p>'+p+'</p>').join('')+'</div>';
+  h+='<div class="dSec"><h5>培 养 目 标 与 方 向</h5><p>'+d.goal+'</p><div class="dTags">'+d.tags.map(t=>'<span>'+t+'</span>').join('')+'</div></div>';
+  h+='<div class="dSec"><h5>课 程 设 置</h5><table class="dCourses"><tr><th>课程</th><th>授课教师</th><th>时间</th><th>地点</th></tr>'+
+     d.courses.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('')+'</table>'+
+     '<div class="dNote">'+d.note+'</div></div>';
+  document.getElementById('dmBody').innerHTML=h;
+  document.getElementById('deptModalBox').scrollTop=0;
+  document.getElementById('deptMask').classList.add('open');
+}
+const ORGS={
+exec:{no:'ORGANIZATION · 行动机构',name:'执 行 部',en:'EXECUTION BUREAU',slogan:'行 走 于 黑 暗 ，服 务 于 光 明',
+ intro:['执行部是学院最重要的行动机构，也是绝大多数毕业生的去向。全世界任何角落出现龙族异动，第一批抵达的一定是执行部专员——他们持外交护照与记者证，乘学部的运输机，在天亮前解决问题，在天亮后登上返程航班。','任务按危险程度分为 D、C、B、A、S、SS 六级。每一份任务档案的结尾都印着同一句话：<em>愿你平安归来。</em>'],
+ goals:['全球龙族异动监测与处置','高危目标猎杀与封存','各国分部协同调度','掩饰协议现场执行','新任专员训练与授衔'],
+ leaders:[{name:'阿卡杜拉·艾哈迈德·穆罕穆德·法鲁格',title:'执行部部长 · BUREAU DIRECTOR',desc:'出身中东分部的传奇专员，经手任务档案摞起来比他本人还高。部下对他的评价出奇一致：跟着部长，活着回来的概率最大。'}],
+ recruit:{slogan:'2026 · 世界需要有人守夜',paras:['执行部 2026 年度「见习专员计划」现已启动，面向全院高年级学生开放。通过选拔者将获得见习专员编号，在资深专员带领下参与 D 级与 C 级任务，表现优异者毕业即授正式衔。','招新周：新学年第一周 · 执行部大楼一层报名，现场设模拟任务体验区（本年度主题：午夜机场撤离）。'],
+ reqs:['通过 3E 评定','格斗系任一课程 B 以上','通过心理稳定性评估','保密协议签署','体检合格']}},
+gear:{no:'ORGANIZATION · 技术机构',name:'装 备 部',en:'WERKSTATT ALCHEMIE',slogan:'诸 神 的 兵 器 ，由 凡 人 锻 造',
+ intro:['装备部全称「炼金术与科学工程应用研究所」，自称<em>瓦特阿尔海姆</em>——诸神的工坊。他们不做纸上谈兵的理论，只专注一件事：把古老炼金术与现代工艺熔于一炉，铸出足以屠龙的兵器。','执行部专员出任务前来这里领装备，回来后来这里修装备，阵亡专员的武器也由这里回收、封存、铭名。工坊深处有一面墙，挂着数百年来所有「再也没有人来取回」的剑。'],
+ goals:['屠龙兵器研发与列装','炼金材料工程转化','任务装备保障与维修','殉职者兵器封存与铭记'],
+ leaders:[{name:'「铁手」瓦格纳',title:'总工程师 · 自封「瓦特阿尔海姆大匠」',desc:'左手是二十年前一次锻造事故留下的合金义肢，也是全学院最灵巧的一只手。口头禅：图纸不会骗人，会骗人的是画图纸的人。（注：原著未载装备部负责人，此为本站设定）'}],
+ recruit:{slogan:'2026 · 我们不看血统，看手艺',paras:['瓦特阿尔海姆 2026 年招募学徒。装备部是全院唯一明示「血统评级不作为录取参考」的机构——在这里，C 级血统的巧手比 S 级血统的笨蛋值钱一百倍。','报名方式：带一件你亲手做的东西来一号工坊，什么都行。木工、电路、锁匠活、修好的旧钟表。工坊 24 小时有人，欢迎通宵。'],
+ reqs:['亲手完成的作品一件','炼金系或机械系在读优先','不怕烫伤划伤','愿意给老工程师递扳手']}},
+lion:{no:'ORGANIZATION · 荣誉结社',name:'狮 心 会',en:'SOCIETY OF LIONHEART',slogan:'狮 子 的 心 脏 ，从 不 畏 惧',
+ intro:['狮心会源于秘党最古老的核心机构，历史上汇聚了历代最勇敢的屠龙者。「夏之哀悼」一役后狮心会几乎全灭，唯有昂热幸存——如今它以学生社团的形态延续，却依旧是学院精神最锋利的一面。','狮心会成员以纪律、荣誉与沉默著称：他们在高危任务中永远站在第一排，在庆功宴上永远坐在最角落。'],
+ goals:['屠龙者荣誉与传统传承','高危任务先锋','院内纪律表率','「夏之哀悼」纪念守护'],
+ leaders:[{name:'楚子航',title:'现任会长 · A 级血统 · 王牌专员',desc:'学院公认的剑术第一人，随身携带一把木剑。寡言，准时，从不缺席晨训。执行部档案里他的任务完成率是一个不需要保密却没人敢挂在嘴边的数字。'}],
+ recruit:{slogan:'2026 · 狮心会不招新，狮心会等你被看见',paras:['狮心会历来实行选拔制，不接受报名——每年由会内成员全票通过邀请极少数人入会。但 2026 年，经会长批准，狮心会将破例举行一次公开试炼。','试炼内容只有一条：完整跟随格斗系晨训一个学期，全勤。期末最后一堂晨训结束时仍站着的人，将获得实战考核资格。考核对手：会内现役成员。'],
+ reqs:['晨训全学期全勤','实战考核（对手保密）','全体会员投票通过','沉默是美德']}},
+union:{no:'ORGANIZATION · 自治机构',name:'学 生 会',en:'STUDENT UNION',slogan:'学 院 属 于 每 一 个 怪 物',
+ intro:['学生会是学院学生自治机构，负责校园事务、社团管理与年度庆典，包括全院最盛大的狂欢——「自由一日」的主办权。与狮心会之间保持着微妙的竞争传统：一边是荣耀与纪律，一边是热闹与人间烟火。','如果说狮心会代表学院的剑，学生会就是学院的炉火——负责让每一个背井离乡的混血种，在这里过得像个人。'],
+ goals:['校园事务自治','社团注册与管理','「自由一日」年度主办','学生福利争取','新生接待与融入'],
+ leaders:[{name:'路明非',title:'现任主席 · S 级血统',desc:'史上最年轻、也最出人意料的学生会主席。竞选纲领只有一句话：「食堂宵夜档延长到凌晨两点。」——并且真的做到了。'},{name:'恺撒·加图索',title:'前任主席 · 加图索家族继承人',desc:'带领学生会崛起并终结狮心会长期压制的男人。卸任时留给继任者的交接手册厚达四百页，第一页写着：体面，永远体面。'}],
+ recruit:{slogan:'2026 · 来当学院的炉火',paras:['学生会 2026 年纳新全面开放，各部门招收干事若干：秘书处、活动部、外联部、生活权益部，以及最忙也最快乐的「自由一日」筹备委员会。','不问血统，不问成绩，面试只有一个环节：主席请你吃食堂，边吃边聊。据往届干事透露，聊得开心比简历好看重要得多。'],
+ reqs:['在校学籍','会打杂者优先','扛得住「自由一日」通宵','有食堂宵夜档情怀者加分']}},
+norma:{no:'SYSTEM · 学院中枢',name:'诺 玛',en:'NORMA · MAINFRAME',slogan:'我 一 直 在 听',
+ intro:['诺玛是学院的人工智能超级计算机中枢，运行于图书馆地下的恒温机房，由信息系维护。学籍档案、血统评级、全球监测、任务通讯——学院的一切数据都流经她。','她以温和的女声回答每一个问题，有问必答，永不遗忘。至于她知道多少没有说出来的事——这个问题，历届信息系主任都建议你不要问。'],
+ goals:['学籍档案与血统评级管理','全球异常数据监测','任务通讯与加密中继','学院设施自动化运行'],
+ leaders:[{name:'诺玛',title:'系统本体 · 服役年限保密',desc:'对「负责人」一词表示困惑：「严格来说，是我在照看他们。」'},{name:'信息系诺玛维护组',title:'运行维护 · 信息系直属',desc:'一支常年驻守地下机房的队伍，工作内容包括硬件巡检、数据备份，以及在凌晨三点听诺玛用播音腔朗读系统日志。'}],
+ recruit:{slogan:'2026 · 来陪她说说话',paras:['诺玛本体不招新（她认为自己运转良好，谢谢关心）。但信息系维护组 2026 年招募运维实习生若干，负责机房巡检与日志整理，可近距离接触学院最古老的秘密之一。','据维护组前辈说，这份工作最大的福利是：值夜班时，诺玛偶尔会给你讲六十年前的旧事——前提是你的权限等级够高，以及，她心情好。'],
+ reqs:['信息系在读优先','签署最高级保密协议','不怕安静也不怕机房','对 AI 保持礼貌']}}
+};
+function openOrg(id){
+  const o=ORGS[id];
+  if(!o){deptSoon();return;}
+  document.getElementById('dmNo').textContent=o.no+' · CASSELL COLLEGE';
+  document.getElementById('dmName').textContent=o.name;
+  document.getElementById('dmEn').textContent=o.en;
+  document.getElementById('dmMotto').textContent=o.slogan;
+  let h='';
+  h+='<div class="dSec"><h5>机 构 简 介</h5>'+o.intro.map(p=>'<p>'+p+'</p>').join('')+'</div>';
+  h+='<div class="dSec"><h5>主 要 目 标</h5><div class="dTags">'+o.goals.map(t=>'<span>'+t+'</span>').join('')+'</div></div>';
+  h+='<div class="dSec"><h5>机 构 负 责 人</h5>'+o.leaders.map(l=>'<div class="dLeader"><div class="ln">'+l.name+'</div><div class="lt">'+l.title+'</div><p>'+l.desc+'</p></div>').join('')+'</div>';
+  h+='<div class="dSec"><h5>2026 招 新</h5><div class="dRecruit"><div class="rSlogan">'+o.recruit.slogan+'</div>'+
+     o.recruit.paras.map(p=>'<p>'+p+'</p>').join('')+
+     '<div class="rReq">'+o.recruit.reqs.map(r=>'<span>'+r+'</span>').join('')+'</div>'+
+     '<button class="btnMain" onclick="closeDept();openAuth(\'register\')">注 册 学 籍 · 参 与 招 新</button></div></div>';
+  document.getElementById('dmBody').innerHTML=h;
+  document.getElementById('deptModalBox').scrollTop=0;
+  document.getElementById('deptMask').classList.add('open');
+}
+function closeDept(){ document.getElementById('deptMask').classList.remove('open'); }
+let toastTimer;
+function deptSoon(){
+  const t=document.getElementById('toast');
+  t.textContent='该系档案正在由信息系整理归档，敬请期待';
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+/* 在线人数轻微浮动，营造真实感 */
+setInterval(()=>{
+  const el=document.getElementById('nwOnline');
+  if(el)el.textContent=340+Math.floor(Math.random()*25);
+},5000);
+nwRefreshHint(); nwRender();
+const _oldRefreshTopbar=refreshTopbar;
+refreshTopbar=function(){ _oldRefreshTopbar(); nwRefreshHint(); };
+</script>
+</body>
+</html>

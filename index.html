@@ -1310,22 +1310,23 @@ nav.main a.cur::after{transform:scaleX(1);}
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 const io = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target);} });
 },{threshold:.12});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
-/* ================= NORMA · student registry ================= */
-const DB_KEY='cassell_users', SS_KEY='cassell_session';
-const load=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
-const save=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
-const users=()=>load(DB_KEY)||{};
+/* ================= NORMA · student registry（云端 · Supabase）================= */
+const SB_URL='https://flfwlzxiejjhojuhtebb.supabase.co';
+const SB_KEY='sb_publishable_iLh16p_0F4GbGzaMxSU7NA_bwcdk-N1';
+const sb=window.supabase.createClient(SB_URL,SB_KEY);
+let CUR=null; /* 当前登录学籍 */
+const clearOf=r=>({S:'S-3 · 核心档案',A:'A-2 · 高阶档案',B:'B-1 · 常规档案',C:'C-1 · 常规档案'}[r]||'C-1 · 常规档案');
 
 function openAuth(tab){
   document.getElementById('authMask').classList.add('open');
-  const cur=load(SS_KEY);
-  if(cur && users()[cur]){ showProfile(users()[cur]); }
+  if(CUR){ showProfile(CUR); }
   else{ showForms(); switchTab(tab||'login'); }
 }
 function closeAuth(){ document.getElementById('authMask').classList.remove('open'); }
@@ -1347,7 +1348,7 @@ function switchTab(t){
   document.getElementById('rgMsg').textContent='';
 }
 
-function doRegister(){
+async function doRegister(){
   const name=document.getElementById('rgName').value.trim();
   const email=document.getElementById('rgEmail').value.trim().toLowerCase();
   const pass=document.getElementById('rgPass').value;
@@ -1356,47 +1357,66 @@ function doRegister(){
   if(!name){msg.textContent='请填写姓名。';return;}
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.textContent='请填写有效的通讯邮箱。';return;}
   if(pass.length<6){msg.textContent='通行密语至少需要 6 位。';return;}
-  const db=users();
-  if(db[email]){msg.textContent='该邮箱已在诺玛档案中登记，请直接登录。';return;}
 
-  // NORMA 3E evaluation (weighted random rank)
   const roll=Math.random();
   const rank= roll<0.03?'S' : roll<0.18?'A' : roll<0.55?'B' : 'C';
-  const clear={S:'S-3 · 核心档案',A:'A-2 · 高阶档案',B:'B-1 · 常规档案',C:'C-1 · 常规档案'}[rank];
   const no='CC-'+new Date().getFullYear()+'-'+String(Math.floor(1000+Math.random()*9000));
-  const user={name,email,pass,dept,rank,clear,no,joined:new Date().toISOString().slice(0,10)};
 
-  // evaluation sequence
   document.getElementById('authForms').style.display='none';
   document.getElementById('evalPane').style.display='';
   document.getElementById('mTitle').textContent='3E 评 定';
   const lines=['正在接入诺玛 NORMA ……','采集血统样本 · Bloodline Sampling ……','精神强度测试 · EEG Analysis ……','综合素养评估 · Evaluation ……','评定完成。正在签发学籍档案……'];
   const evLine=document.getElementById('evLine'), evBar=document.getElementById('evBar');
   let i=0; evBar.style.width='0';
-  const timer=setInterval(()=>{
-    evLine.textContent=lines[i];
-    evBar.style.width=((i+1)/lines.length*100)+'%';
-    i++;
-    if(i>=lines.length){
-      clearInterval(timer);
-      setTimeout(()=>{
-        db[email]=user; save(DB_KEY,db); save(SS_KEY,email);
-        showProfile(user,true); refreshTopbar();
-        if(typeof refreshRegStat==='function')refreshRegStat();
-      },700);
-    }
-  },850);
+  const anim=new Promise(res=>{
+    const t=setInterval(()=>{
+      evLine.textContent=lines[i];
+      evBar.style.width=((i+1)/lines.length*100)+'%';
+      i++;
+      if(i>=lines.length){clearInterval(t);setTimeout(res,600);}
+    },850);
+  });
+  const net=(async()=>{
+    const {data:su,error:se}=await sb.auth.signUp({email,password:pass});
+    if(se)throw se;
+    const prof={user_id:su.user.id,name,dept,rank,no};
+    const {error:ie}=await sb.from('students').insert(prof);
+    if(ie)throw ie;
+    return prof;
+  })();
+  try{
+    const r=await Promise.all([anim,net]);
+    const prof=r[1];
+    CUR=Object.assign({joined:new Date().toISOString().slice(0,10)},prof);
+    showProfile(CUR,true); refreshTopbar();
+    if(typeof refreshRegStat==='function')refreshRegStat();
+  }catch(e){
+    showForms(); switchTab('register');
+    const m=(e&&e.message)||'';
+    document.getElementById('rgMsg').textContent=
+      m.indexOf('already')>-1?'该邮箱已在诺玛档案中登记，请直接登录。':'诺玛连接失败，请稍后再试。';
+  }
 }
 
-function doLogin(){
+async function doLogin(){
   const email=document.getElementById('liEmail').value.trim().toLowerCase();
   const pass=document.getElementById('liPass').value;
   const msg=document.getElementById('liMsg');
-  const u=users()[email];
-  if(!u){msg.textContent='诺玛档案中查无此人，请先注册学籍。';return;}
-  if(u.pass!==pass){msg.textContent='通行密语错误。';return;}
-  save(SS_KEY,email);
-  showProfile(u); refreshTopbar();
+  msg.textContent='正在核对档案……';
+  const {data,error}=await sb.auth.signInWithPassword({email,password:pass});
+  if(error){msg.textContent='登录失败：邮箱或通行密语有误。';return;}
+  await loadProfile(data.user.id);
+  if(!CUR){
+    CUR={user_id:data.user.id,name:email.split('@')[0],dept:'未登记',rank:'C',no:'CC-'+new Date().getFullYear()+'-0000',joined:new Date().toISOString().slice(0,10)};
+    await sb.from('students').insert({user_id:CUR.user_id,name:CUR.name,dept:CUR.dept,rank:CUR.rank,no:CUR.no});
+  }
+  msg.textContent='';
+  showProfile(CUR); refreshTopbar();
+}
+
+async function loadProfile(uid){
+  const {data}=await sb.from('students').select('*').eq('user_id',uid).limit(1);
+  CUR=(data&&data[0])||null;
 }
 
 function showProfile(u,isNew){
@@ -1406,31 +1426,43 @@ function showProfile(u,isNew){
   document.getElementById('mTitle').textContent=isNew?'入 学 通 知':'学 生 档 案';
   document.getElementById('idWelcome').textContent=isNew?'ENROLLMENT COMPLETE · 评定完成':'STUDENT PROFILE · 在册学生';
   document.getElementById('idName').textContent=u.name;
-  document.getElementById('idNo').textContent=u.no+' · SINCE '+u.joined;
+  document.getElementById('idNo').textContent=u.no+' · SINCE '+String(u.joined||'').slice(0,10);
   document.getElementById('idRank').textContent=u.rank;
-  document.getElementById('idDept').textContent=u.dept.split(' · ')[0];
-  document.getElementById('idClear').textContent=u.clear;
+  document.getElementById('idDept').textContent=(u.dept||'').split(' · ')[0];
+  document.getElementById('idClear').textContent=clearOf(u.rank);
   document.getElementById('idOath').innerHTML= isNew
     ? '这里的每一盏灯都为你而亮。<br><b>怪物，欢迎回家。</b>'
     : '欢迎回来，'+u.name+'。<br><b>愿你平安归来。</b>';
 }
 
-function doLogout(){
-  localStorage.removeItem(SS_KEY);
+async function doLogout(){
+  await sb.auth.signOut();
+  CUR=null;
   refreshTopbar(); showForms(); switchTab('login');
 }
 
 function refreshTopbar(){
-  const cur=load(SS_KEY), u=cur?users()[cur]:null;
-  document.getElementById('topbarUser').innerHTML = u
-    ? '<a href="javascript:void(0)" onclick="openAuth()" class="authLink"><b>'+u.no+'</b> · '+u.name+' · 血统 '+u.rank+' 级</a><span class="sep">|</span><a href="javascript:void(0)" onclick="doLogout()" class="authLink">SIGN OUT · 注销</a>'
+  document.getElementById('topbarUser').innerHTML = CUR
+    ? '<a href="javascript:void(0)" onclick="openAuth()" class="authLink"><b>'+CUR.no+'</b> · '+CUR.name+' · 血统 '+CUR.rank+' 级</a><span class="sep">|</span><a href="javascript:void(0)" onclick="doLogout()" class="authLink">SIGN OUT · 注销</a>'
     : '<a href="javascript:void(0)" onclick="openAuth(\'login\')" class="authLink">STUDENT LOGIN · 学生登录</a><span class="sep">|</span><a href="javascript:void(0)" onclick="openAuth(\'register\')" class="authLink">ENROLL · 注册学籍</a>';
 }
 refreshTopbar();
+(async()=>{
+  try{
+    const {data:{session}}=await sb.auth.getSession();
+    if(session){ await loadProfile(session.user.id); refreshTopbar(); }
+  }catch(e){}
+})();
 
-/* ================= stats counters ================= */
-const REG_BASE=286; // 本届已登记基数
-function regCount(){ return REG_BASE + Object.keys(users()).length; }
+/* ================= stats counters（云端实时）================= */
+const REG_BASE=286;
+let REG_COUNT=REG_BASE;
+async function fetchRegCount(){
+  try{
+    const {count}=await sb.from('students').select('*',{count:'exact',head:true});
+    if(typeof count==='number')REG_COUNT=REG_BASE+count;
+  }catch(e){}
+}
 function animateNum(el,target){
   const dur=1600, t0=performance.now();
   (function step(t){
@@ -1444,11 +1476,11 @@ const statsIO=new IntersectionObserver(es=>{
     if(!e.isIntersecting)return;
     statsIO.unobserve(e.target);
     e.target.querySelectorAll('[data-count]').forEach(el=>animateNum(el,+el.dataset.count));
-    animateNum(document.getElementById('statReg'),regCount());
+    fetchRegCount().then(()=>animateNum(document.getElementById('statReg'),REG_COUNT));
   });
 },{threshold:.3});
 statsIO.observe(document.querySelector('.stats'));
-function refreshRegStat(){ document.getElementById('statReg').textContent=regCount().toLocaleString('en-US'); }
+function refreshRegStat(){ REG_COUNT++; document.getElementById('statReg').textContent=REG_COUNT.toLocaleString('en-US'); }
 
 /* ================= smooth chrome：进度条 / 返回顶部 / 导航高亮 ================= */
 const progEl=document.getElementById('progress'), topBtn=document.getElementById('toTop');
@@ -1469,45 +1501,50 @@ const spy=new IntersectionObserver(es=>{
 },{rootMargin:'-30% 0px -60% 0px'});
 document.querySelectorAll('section[id]').forEach(s=>spy.observe(s));
 
-/* ================= 守夜人讨论区 ================= */
-const NW_KEY='cassell_posts';
-function nwUser(){ const cur=load(SS_KEY); return cur?users()[cur]:null; }
+/* ================= 守夜人讨论区（云端共享）================= */
+function nwUser(){ return CUR; }
 function nwRefreshHint(){
-  const u=nwUser(), hint=document.getElementById('nwHint');
+  const hint=document.getElementById('nwHint');
   if(!hint)return;
-  hint.innerHTML=u
-    ? '当前身份：<b style="color:var(--gold-soft)">'+u.name+'</b> · '+u.no+' · 血统 '+u.rank+' 级'
+  hint.innerHTML=CUR
+    ? '当前身份：<b style="color:var(--gold-soft)">'+CUR.name+'</b> · '+CUR.no+' · 血统 '+CUR.rank+' 级'
     : '发言需持有效学籍 · <a href="javascript:void(0)" onclick="openAuth(\'login\')" style="text-decoration:underline;color:var(--gold-soft)">请先登录或注册</a>';
 }
-function nwRender(){
+async function nwRender(){
   const list=document.getElementById('nwList');
   if(!list)return;
-  list.querySelectorAll('.nwPost.user').forEach(el=>el.remove());
-  const posts=load(NW_KEY)||[];
-  const pin=list.querySelector('.nwPost'); // 置顶帖
-  posts.slice().reverse().forEach(p=>{
-    const div=document.createElement('div');
-    div.className='nwPost user';
-    div.innerHTML='<span class="nwTag hot">新帖</span><div><div class="tt"></div>'+
-      '<div class="meta">发帖人 <b></b> · 血统 '+p.rank+' 级 · '+p.time+'</div></div>'+
-      '<div class="re"><b>0</b>回复</div>';
-    div.querySelector('.tt').textContent=p.text;
-    div.querySelector('.meta b').textContent=p.author;
-    pin.after(div);
-  });
+  try{
+    const {data:posts}=await sb.from('posts').select('*').order('created_at',{ascending:false}).limit(20);
+    list.querySelectorAll('.nwPost.user').forEach(el=>el.remove());
+    if(!posts||!posts.length)return;
+    const pin=list.querySelector('.nwPost');
+    posts.slice().reverse().forEach(p=>{
+      const time=new Date(p.created_at).toLocaleString('zh-CN',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'});
+      const div=document.createElement('div');
+      div.className='nwPost user';
+      div.innerHTML='<span class="nwTag hot">新帖</span><div><div class="tt"></div>'+
+        '<div class="meta">发帖人 <b></b> · 血统 '+(p.rank||'?')+' 级 · '+time+'</div></div>'+
+        '<div class="re"><b>—</b>守夜中</div>';
+      div.querySelector('.tt').textContent=p.text;
+      div.querySelector('.meta b').textContent=p.author;
+      pin.after(div);
+    });
+  }catch(e){}
 }
-function nwPost(){
-  const u=nwUser();
-  if(!u){ openAuth('login'); return; }
+async function nwPost(){
+  if(!CUR){ openAuth('login'); return; }
   const ta=document.getElementById('nwText');
   const text=ta.value.trim();
   if(!text)return;
-  const posts=load(NW_KEY)||[];
-  posts.push({text,author:u.name,rank:u.rank,time:new Date().toLocaleString('zh-CN',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'})});
-  save(NW_KEY,posts);
-  ta.value='';
-  nwRender();
+  const btn=document.getElementById('nwSubmit');
+  btn.disabled=true; btn.textContent='发 布 中 …';
+  const {error}=await sb.from('posts').insert({text,author:CUR.name,rank:CUR.rank});
+  btn.disabled=false; btn.textContent='发 布';
+  if(!error){ ta.value=''; nwRender(); }
 }
+/* 定时刷新帖子，看到别人的新发言 */
+setInterval(nwRender,30000);
+
 /* ================= 院系档案 ================= */
 const DEPTS={
 alchemy:{no:'DEPT. II',name:'炼 金 系',en:'DEPARTMENT OF ALCHEMY',motto:'万 物 皆 可 熔 铸 ，唯 誓 言 不 灭',

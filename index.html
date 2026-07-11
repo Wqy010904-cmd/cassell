@@ -439,6 +439,19 @@ footer .fine{
 }
 .idCard .oathLine b{color:var(--crimson-deep);letter-spacing:.24em;}
 
+/* mail notice */
+.mailNotice{
+  display:flex;align-items:center;gap:14px;text-align:left;
+  border:2px dashed var(--crimson);background:rgba(122,31,35,.06);
+  padding:14px 18px;margin:0 0 18px;
+  animation:mailPulse 2s ease-in-out infinite;
+}
+@keyframes mailPulse{0%,100%{box-shadow:0 0 0 0 rgba(122,31,35,.25);}50%{box-shadow:0 0 0 6px rgba(122,31,35,0);}}
+.mailNotice .mIcon{font-size:26px;line-height:1;flex:none;}
+.mailNotice .mTxt{font-size:13px;line-height:1.9;color:var(--ink);letter-spacing:.04em;}
+.mailNotice .mTxt b{color:var(--crimson-deep);}
+.mailNotice .mTxt small{color:var(--ink-soft);}
+
 /* norma evaluation animation */
 .evalBox{text-align:center;padding:28px 0 12px;}
 .evalBox .evLine{
@@ -1349,6 +1362,14 @@ nav.main a.cur::after{transform:scaleX(1);}
       <div class="oathLine" id="idOath">
         这里的每一盏灯都为你而亮。<br><b>怪物，欢迎回家。</b>
       </div>
+      <div class="mailNotice" id="idMailNote" style="display:none;">
+        <span class="mIcon">✉️</span>
+        <span class="mTxt">
+          <b>你的《录取通知书》已寄出！</b><br>
+          请立即查收邮箱 <b id="idMailEmail"></b><br>
+          <small>若未在收件箱看到，请检查「垃圾邮件」或「推广」分类</small>
+        </span>
+      </div>
       <button class="btnMain" onclick="closeAuth()">开 始 你 的 学 院 生 活</button>
       <div class="authMsg"><a href="javascript:void(0)" onclick="doLogout()" style="text-decoration:underline;cursor:pointer;">注销登录 SIGN OUT</a></div>
     </div>
@@ -1451,6 +1472,7 @@ async function doRegister(){
     const prof=r[1];
     CUR=Object.assign({joined:new Date().toISOString().slice(0,10)},prof);
     sendAdmissionLetter(email,prof,city);
+    document.getElementById('idMailEmail').textContent=email;
     showProfile(CUR,true); refreshTopbar();
     if(typeof refreshRegStat==='function')refreshRegStat();
   }catch(e){
@@ -1494,8 +1516,9 @@ function showProfile(u,isNew){
   document.getElementById('idDept').textContent=(u.dept||'').split(' · ')[0];
   document.getElementById('idBranch').textContent=u.city?('卡塞尔学院 · '+u.city+'分部'):'卡塞尔学院 · 总部直属';
   document.getElementById('idClear').textContent=clearOf(u.rank);
+  document.getElementById('idMailNote').style.display=isNew?'':'none';
   document.getElementById('idOath').innerHTML= isNew
-    ? '这里的每一盏灯都为你而亮。<br><b>怪物，欢迎回家。</b><br><small style="color:var(--gold);letter-spacing:.08em;">正式录取通知书已寄往你的通讯邮箱，请查收（含垃圾箱）</small>'
+    ? '这里的每一盏灯都为你而亮。<br><b>怪物，欢迎回家。</b>'
     : '欢迎回来，'+u.name+'。<br><b>愿你平安归来。</b>';
 }
 

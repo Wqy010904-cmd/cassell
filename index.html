@@ -382,6 +382,60 @@ section.block.alt{background:var(--parchment-deep);border-top:1px solid var(--li
 }
 .btnGhost:hover{background:var(--gold);color:#fff;}
 
+/* ---------- public courses ---------- */
+.secSub{text-align:center;margin:64px 0 34px;}
+.secSub .k2{font-size:11px;letter-spacing:.44em;color:var(--gold);font-family:'Cinzel',serif;}
+.secSub h4{font-size:21px;font-weight:600;letter-spacing:.26em;text-indent:.26em;color:var(--crimson-deep);margin-top:8px;}
+.secSub p{font-size:12.5px;color:var(--ink-soft);letter-spacing:.1em;margin-top:8px;}
+.pubGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.pub{
+  background:var(--parchment);border:1px solid var(--line);border-top:3px solid var(--gold);
+  padding:24px 22px;display:flex;flex-direction:column;transition:.3s;
+}
+.pub:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(43,36,28,.1);}
+.pub .pcType{
+  align-self:flex-start;font-size:10.5px;letter-spacing:.2em;padding:3px 10px;
+  border:1px solid var(--gold-soft);color:var(--gold);margin-bottom:10px;
+}
+.pub .pcType.req{border-color:var(--crimson);color:var(--crimson);}
+.pub h5{font-size:16.5px;font-weight:600;letter-spacing:.1em;color:var(--crimson-deep);}
+.pub .pcEn{font-size:9.5px;letter-spacing:.24em;color:var(--gold);font-family:'Cinzel',serif;margin:3px 0 10px;}
+.pub p{font-size:12.5px;color:var(--ink-soft);line-height:1.9;text-align:justify;flex:1;}
+.pub .pcInfo{font-size:11px;color:var(--ink-soft);letter-spacing:.06em;margin:10px 0 12px;border-top:1px dashed var(--line);padding-top:9px;}
+.pcBtn{
+  width:100%;padding:9px 0;cursor:pointer;font-family:inherit;font-size:12.5px;
+  letter-spacing:.28em;text-indent:.28em;transition:.25s;
+  background:transparent;border:1px solid var(--crimson);color:var(--crimson-deep);
+}
+.pcBtn:hover{background:var(--crimson);color:var(--parchment);}
+.pcBtn.on{background:var(--crimson-deep);border-color:var(--crimson-deep);color:#e9ddc4;}
+.pcBtn.req{border-color:var(--gold);color:var(--gold);cursor:default;background:transparent;}
+@media (max-width:860px){.pubGrid{grid-template-columns:1fr;}}
+
+/* ---------- handbook ---------- */
+.hbList{padding:6px 0;}
+.hbItem{
+  display:grid;grid-template-columns:44px 1fr auto;gap:16px;align-items:center;
+  padding:18px 6px;border-bottom:1px dashed var(--line);cursor:pointer;transition:.25s;
+}
+.hbItem:hover{background:rgba(168,135,61,.05);}
+.hbItem .hbNo{
+  width:38px;height:38px;border:1px solid var(--gold);transform:rotate(45deg);
+  display:flex;align-items:center;justify-content:center;
+}
+.hbItem .hbNo span{transform:rotate(-45deg);font-family:'Cinzel',serif;font-size:14px;color:var(--crimson);}
+.hbItem.done .hbNo{background:var(--crimson-deep);border-color:var(--crimson-deep);}
+.hbItem.done .hbNo span{color:#e9ddc4;}
+.hbItem h6{font-size:15px;letter-spacing:.12em;color:var(--crimson-deep);font-weight:600;margin-bottom:3px;}
+.hbItem p{font-size:12px;color:var(--ink-soft);line-height:1.8;margin:0;}
+.hbItem .hbSt{font-size:11px;letter-spacing:.2em;white-space:nowrap;color:var(--gold);}
+.hbItem.done .hbSt{color:#4a7c59;}
+.hbFoot{
+  text-align:center;font-size:12px;color:var(--ink-soft);letter-spacing:.1em;
+  padding:18px 0 4px;line-height:2;
+}
+.hbFoot b{color:var(--crimson-deep);}
+
 /* ---------- footer ---------- */
 footer{
   background:#1d1610;color:#b8a888;
@@ -1053,6 +1107,12 @@ nav.main a.cur::after{transform:scaleX(1);}
         <span class="more">查看院系档案 →</span>
       </div>
     </div>
+    <div class="secSub rv">
+      <div class="k2">GENERAL CURRICULUM</div>
+      <h4>全 院 公 共 课 程</h4>
+      <p>不分院系 · 必修一门 · 公共选修至多三门（登录学籍后可选课，选课记录写入档案）</p>
+    </div>
+    <div class="pubGrid rv" id="pubGrid"></div>
   </div>
 </section>
 
@@ -1415,6 +1475,20 @@ nav.main a.cur::after{transform:scaleX(1);}
   </div>
 </div>
 
+<!-- ================= HANDBOOK MODAL ================= -->
+<div class="modalMask" id="hbMask" onclick="if(event.target===this)closeHandbook()">
+  <div class="deptModal" style="max-width:620px;">
+    <button class="close" onclick="closeHandbook()">×</button>
+    <div class="dHead">
+      <div class="dNo">FRESHMAN HANDBOOK · CASSELL COLLEGE</div>
+      <h4>新 生 入 学 手 册</h4>
+      <div class="dEn">FIVE STEPS TO CALL THIS PLACE HOME</div>
+      <div class="dMotto">按 此 五 步 ，把 这 里 变 成 你 的 家</div>
+    </div>
+    <div class="dBody" id="hbBody"></div>
+  </div>
+</div>
+
 <div id="toast"></div>
 
 <!-- ================= AUTH MODAL ================= -->
@@ -1522,7 +1596,8 @@ nav.main a.cur::after{transform:scaleX(1);}
           <small>若未在收件箱看到，请检查「垃圾邮件」或「推广」分类</small>
         </span>
       </div>
-      <button class="btnMain" onclick="closeAuth()">开 始 你 的 学 院 生 活</button>
+      <button class="btnMain" onclick="closeAuth();openHandbook()">领 取 《 新 生 入 学 手 册 》</button>
+      <div style="margin-top:10px;"><button class="btnGhost" onclick="closeAuth()">直 接 开 始 学 院 生 活</button></div>
       <div class="authMsg"><a href="javascript:void(0)" onclick="doLogout()" style="text-decoration:underline;cursor:pointer;">注销登录 SIGN OUT</a></div>
     </div>
   </div>
@@ -1625,7 +1700,7 @@ async function doRegister(){
     CUR=Object.assign({joined:new Date().toISOString().slice(0,10)},prof);
     sendAdmissionLetter(email,prof,city);
     document.getElementById('idMailEmail').textContent=email;
-    showProfile(CUR,true); refreshTopbar();
+    showProfile(CUR,true); refreshTopbar(); renderPubCourses();
     if(typeof refreshRegStat==='function')refreshRegStat();
   }catch(e){
     showForms(); switchTab('register');
@@ -1648,7 +1723,7 @@ async function doLogin(){
     await sb.from('students').insert({user_id:CUR.user_id,name:CUR.name,dept:CUR.dept,rank:CUR.rank,no:CUR.no});
   }
   msg.textContent='';
-  showProfile(CUR); refreshTopbar();
+  showProfile(CUR); refreshTopbar(); renderPubCourses();
 }
 
 async function loadProfile(uid){
@@ -1679,6 +1754,7 @@ async function doLogout(){
   await sb.auth.signOut();
   CUR=null;
   refreshTopbar(); showForms(); switchTab('login');
+  if(typeof renderPubCourses==='function')renderPubCourses();
 }
 
 function refreshTopbar(){
@@ -1690,7 +1766,7 @@ refreshTopbar();
 (async()=>{
   try{
     const {data:{session}}=await sb.auth.getSession();
-    if(session){ await loadProfile(session.user.id); refreshTopbar(); }
+    if(session){ await loadProfile(session.user.id); refreshTopbar(); renderPubCourses(); }
   }catch(e){}
 })();
 
@@ -1805,7 +1881,7 @@ async function nwPost(){
   btn.disabled=true; btn.textContent='发 布 中 …';
   const {error}=await sb.from('posts').insert({text,author:CUR.name,rank:CUR.rank});
   btn.disabled=false; btn.textContent='发 布';
-  if(!error){ ta.value=''; nwRender(); }
+  if(!error){ ta.value=''; nwRender(); try{localStorage.setItem('nw_posted_'+CUR.user_id,'1');}catch(e){} }
 }
 /* 定时刷新帖子，看到别人的新发言 */
 setInterval(nwRender,30000);
@@ -2063,6 +2139,85 @@ function deptSoon(){
   t.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer=setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+/* ================= 公共课程 · 选课 ================= */
+const PUB_COURSES=[
+ {id:'dragonology',name:'龙类学概论',en:'INTRO TO DRACONOLOGY',type:'必修',desc:'全院新生必修。从龙族谱系到行为习性，认识你未来将要面对的东西——以及为什么它值得敬畏。',info:'龙族历史系承办 · 大礼堂 · 周一 19:00'},
+ {id:'wilderness',name:'野外生存',en:'WILDERNESS SURVIVAL',type:'公共选修',desc:'后山七日：辨向、取火、庇护所搭建，以及最重要的一课——「不要惊动任何东西」。',info:'格斗系承办 · 后山营地 · 隔周周末'},
+ {id:'fieldwork',name:'综合实战演习',en:'FIELD PRACTICUM',type:'公共选修',desc:'执行部教官带队的 D 级模拟任务：情报、潜入、撤离全流程。学期末赴远郊实地演习。',info:'执行部承办 · 远郊演习场 · 周六全天'},
+ {id:'ai',name:'人工智能与诺玛协作',en:'AI &amp; NORMA COLLABORATION',type:'公共选修',desc:'当代屠龙者的必备素养：让人工智能成为你的第二双眼睛。课程助教：诺玛本人。',info:'信息系承办 · 信息楼 101 · 周三 19:00'},
+ {id:'disguise',name:'现代社会伪装学',en:'URBAN CAMOUFLAGE',type:'公共选修',desc:'如何在普通人类中间生活得像个普通人类：社交礼仪、身份维护与「解释你眼睛为什么会发光」。',info:'新闻系承办 · 文史楼 302 · 周五 16:00'},
+ {id:'meditation',name:'精神防护与冥想',en:'MENTAL WARDING',type:'公共选修',desc:'血统躁动时的自我安抚与精神屏障技术。言灵使用者与高血统评级者强烈建议修读。',info:'校医院承办 · 静默室 · 周二 07:00'}
+];
+function myCourses(){ return (CUR&&CUR.courses)?CUR.courses.split(','):[]; }
+function renderPubCourses(){
+  const g=document.getElementById('pubGrid');
+  if(!g)return;
+  const mine=myCourses();
+  g.innerHTML=PUB_COURSES.map(function(c){
+    let btn;
+    if(c.type==='必修'){
+      btn='<button class="pcBtn req" disabled>全 员 在 册</button>';
+    }else if(!CUR){
+      btn='<button class="pcBtn" onclick="openAuth(\'login\')">登 录 后 选 课</button>';
+    }else if(mine.indexOf(c.id)>-1){
+      btn='<button class="pcBtn on" onclick="togglePub(\''+c.id+'\')">✓ 已 选 · 点 击 退 选</button>';
+    }else{
+      btn='<button class="pcBtn" onclick="togglePub(\''+c.id+'\')">选 修 此 课</button>';
+    }
+    return '<div class="pub"><span class="pcType'+(c.type==='必修'?' req':'')+'">'+c.type+'</span>'+
+      '<h5>'+c.name+'</h5><div class="pcEn">'+c.en+'</div><p>'+c.desc+'</p>'+
+      '<div class="pcInfo">'+c.info+'</div>'+btn+'</div>';
+  }).join('');
+}
+async function togglePub(id){
+  if(!CUR){openAuth('login');return;}
+  let mine=myCourses();
+  if(mine.indexOf(id)>-1){ mine=mine.filter(function(x){return x!==id;}); }
+  else{
+    if(mine.length>=3){
+      const t=document.getElementById('toast');
+      t.textContent='公共选修至多三门——先退选一门再来';
+      t.classList.add('show');clearTimeout(toastTimer);
+      toastTimer=setTimeout(function(){t.classList.remove('show');},2200);
+      return;
+    }
+    mine.push(id);
+  }
+  const val=mine.join(',');
+  const {error}=await sb.from('students').update({courses:val||null}).eq('user_id',CUR.user_id);
+  if(!error){CUR.courses=val;renderPubCourses();}
+}
+renderPubCourses();
+
+/* ================= 新生入学手册 ================= */
+function openHandbook(){
+  const posted=CUR&&localStorage.getItem('nw_posted_'+CUR.user_id);
+  const hasOrg=CUR&&CUR.org;
+  const hasCourse=CUR&&CUR.courses;
+  const items=[
+    {t:'查收《录取通知书》',d:'正式录取通知书已寄往你的注册邮箱，请查收；若收件箱没有，请翻一翻「垃圾邮件」或「推广」分类。',done:false,st:'去 邮 箱',act:'closeHandbook()'},
+    {t:'确认专业课表 · 选修公共课',d:'到「院系设置」查看你所在院系的课程表，并在下方「全院公共课程」区选修至多三门公共课。',done:!!hasCourse,st:hasCourse?'已 选 课':'去 选 课',act:'hbGo(\'#departments\')'},
+    {t:'加入心仪的组织',d:'执行部、装备部、学生会、诺玛维护组任你申请——胆子大的，可以去狮心会递交试炼申请。',done:!!hasOrg,st:hasOrg?'已 加 入':'去 招 新',act:'hbGo(\'#organizations\')'},
+    {t:'在守夜人专区发出第一帖',d:'匿名社区里有悬赏、情报、八卦和整个学院的烟火气。发出你的第一帖，让大家认识你。',done:!!posted,st:posted?'已 发 帖':'去 发 帖',act:'hbGo(\'#nightwatch\')'},
+    {t:'研读院规与奖学金条款',d:'八条院规保你平安毕业；尼伯龙根奖学金的维持条件，值得在挂科之前看一眼。',done:false,st:'去 研 读',act:'hbGo(\'#policy\')'}
+  ];
+  let h='<div class="hbList">'+items.map(function(it,i){
+    return '<div class="hbItem'+(it.done?' done':'')+'" onclick="'+it.act+'">'+
+      '<div class="hbNo"><span>'+(it.done?'✓':(i+1))+'</span></div>'+
+      '<div><h6>'+it.t+'</h6><p>'+it.d+'</p></div>'+
+      '<div class="hbSt">'+it.st+'</div></div>';
+  }).join('')+'</div>';
+  h+='<div class="hbFoot">完成以上五步，你就不再是访客，而是<b>卡塞尔的一员</b>。<br>手册可随时领取：登录后打开学生档案即可。</div>';
+  document.getElementById('hbBody').innerHTML=h;
+  document.getElementById('hbMask').classList.add('open');
+}
+function closeHandbook(){ document.getElementById('hbMask').classList.remove('open'); }
+function hbGo(sel){
+  closeHandbook();
+  const el=document.querySelector(sel);
+  if(el)el.scrollIntoView({behavior:'smooth'});
 }
 
 /* 在线人数轻微浮动，营造真实感 */

@@ -290,6 +290,34 @@ section.block.alt{background:var(--parchment-deep);border-top:1px solid var(--li
 }
 .notice b{color:var(--crimson);}
 
+/* ---------- admission live feed ---------- */
+.admLive{
+  border:1px solid var(--gold);outline:1px solid var(--gold);outline-offset:4px;
+  background:var(--parchment);padding:28px 32px;margin-bottom:40px;
+}
+.alHead{
+  display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;
+  border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:6px;
+}
+.alNum{font-family:'Cinzel',serif;font-size:42px;font-weight:600;color:var(--crimson-deep);line-height:1;}
+.alNumLbl{font-size:11px;letter-spacing:.3em;color:var(--gold);margin-top:8px;font-family:'Cinzel','Noto Serif SC',serif;}
+.alLive{font-size:12px;letter-spacing:.22em;color:var(--ink-soft);display:flex;align-items:center;gap:8px;}
+.alDot{
+  width:8px;height:8px;border-radius:50%;background:var(--crimson);display:inline-block;
+  animation:alPulse 1.6s ease-in-out infinite;
+}
+@keyframes alPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.35;transform:scale(.8);}}
+.alRow{
+  display:flex;gap:16px;align-items:baseline;flex-wrap:wrap;
+  padding:11px 2px;border-bottom:1px dashed var(--line);font-size:13.5px;
+}
+.alRow:last-child{border-bottom:none;}
+.alRow .t{color:var(--ink-soft);font-size:12px;letter-spacing:.08em;min-width:86px;}
+.alRow .b{color:var(--crimson-deep);font-weight:600;letter-spacing:.06em;}
+.alRow .n{color:var(--ink);letter-spacing:.06em;}
+.alRow .r{color:var(--gold);font-size:12px;letter-spacing:.12em;margin-left:auto;}
+.alEmpty{padding:18px 2px;color:var(--ink-soft);font-size:13px;letter-spacing:.1em;text-align:center;}
+
 /* ---------- footer ---------- */
 footer{
   background:#1d1610;color:#b8a888;
@@ -1069,6 +1097,18 @@ nav.main a.cur::after{transform:scaleX(1);}
         <p>通过评定者将获得全额奖学金与终身档案编号，在开学典礼上与全体新生一同宣读校训——自此，你不再独行。</p>
       </div>
     </div>
+    <div class="admLive rv">
+      <div class="alHead">
+        <div>
+          <div class="alNum" id="admCount">—</div>
+          <div class="alNumLbl">累计注册学籍 · TOTAL ENROLLED</div>
+        </div>
+        <div class="alLive"><span class="alDot"></span>实时录取动态 · LIVE</div>
+      </div>
+      <div class="alList" id="admFeed">
+        <div class="alEmpty">录取动态加载中……</div>
+      </div>
+    </div>
     <div class="notice rv">
       <b>招生办公室谨启：</b>本院全体在校生均享全额奖学金待遇，衣食住行皆由学院承担。<br>
       若您从未收到过我们的信函，请相信——那是一种幸运。愿您安度平凡而幸福的一生。
@@ -1258,6 +1298,10 @@ nav.main a.cur::after{transform:scaleX(1);}
           <input type="password" id="rgPass" placeholder="至少 6 位">
         </div>
         <div class="fld">
+          <label>LOCATION · 所在地（城市）</label>
+          <input type="text" id="rgCity" placeholder="例如：北京 —— 你将编入卡塞尔学院·北京分部" autocomplete="off">
+        </div>
+        <div class="fld">
           <label>INTENDED DEPARTMENT · 意向院系</label>
           <select id="rgDept">
             <option>龙族历史系 · Dragon History</option>
@@ -1297,6 +1341,7 @@ nav.main a.cur::after{transform:scaleX(1);}
       </div>
       <div class="rows">
         <div><span>DEPARTMENT · 院系</span><b id="idDept"></b></div>
+        <div><span>BRANCH · 所属分部</span><b id="idBranch"></b></div>
         <div><span>STATUS · 状态</span><b>在册 ENROLLED</b></div>
         <div><span>SCHOLARSHIP · 奖学金</span><b>全额 FULL</b></div>
         <div><span>CLEARANCE · 权限</span><b id="idClear"></b></div>
@@ -1353,6 +1398,7 @@ async function doRegister(){
   const email=document.getElementById('rgEmail').value.trim().toLowerCase();
   const pass=document.getElementById('rgPass').value;
   const dept=document.getElementById('rgDept').value;
+  const city=document.getElementById('rgCity').value.trim();
   const msg=document.getElementById('rgMsg');
   if(!name){msg.textContent='请填写姓名。';return;}
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.textContent='请填写有效的通讯邮箱。';return;}
@@ -1379,7 +1425,7 @@ async function doRegister(){
   const net=(async()=>{
     const {data:su,error:se}=await sb.auth.signUp({email,password:pass});
     if(se)throw se;
-    const prof={user_id:su.user.id,name,dept,rank,no};
+    const prof={user_id:su.user.id,name,dept,rank,no,city:city||null};
     const {error:ie}=await sb.from('students').insert(prof);
     if(ie)throw ie;
     return prof;
@@ -1429,6 +1475,7 @@ function showProfile(u,isNew){
   document.getElementById('idNo').textContent=u.no+' · SINCE '+String(u.joined||'').slice(0,10);
   document.getElementById('idRank').textContent=u.rank;
   document.getElementById('idDept').textContent=(u.dept||'').split(' · ')[0];
+  document.getElementById('idBranch').textContent=u.city?('卡塞尔学院 · '+u.city+'分部'):'卡塞尔学院 · 总部直属';
   document.getElementById('idClear').textContent=clearOf(u.rank);
   document.getElementById('idOath').innerHTML= isNew
     ? '这里的每一盏灯都为你而亮。<br><b>怪物，欢迎回家。</b>'
@@ -1480,7 +1527,32 @@ const statsIO=new IntersectionObserver(es=>{
   });
 },{threshold:.3});
 statsIO.observe(document.querySelector('.stats'));
-function refreshRegStat(){ REG_COUNT++; document.getElementById('statReg').textContent=REG_COUNT.toLocaleString('en-US'); }
+function refreshRegStat(){
+  REG_COUNT++;
+  document.getElementById('statReg').textContent=REG_COUNT.toLocaleString('en-US');
+  admRender();
+}
+const esc=x=>String(x==null?'':x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+async function admRender(){
+  const feed=document.getElementById('admFeed');
+  if(!feed)return;
+  try{
+    const q=await sb.from('students').select('name,rank,city,created_at').order('created_at',{ascending:false}).limit(8);
+    await fetchRegCount();
+    document.getElementById('admCount').textContent=REG_COUNT.toLocaleString('en-US');
+    if(q.data&&q.data.length){
+      feed.innerHTML=q.data.map(st=>{
+        const t=new Date(st.created_at).toLocaleString('zh-CN',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'});
+        const br=st.city?('卡塞尔学院 · '+esc(st.city)+'分部'):'卡塞尔学院 · 总部';
+        return '<div class="alRow"><span class="t">'+t+'</span><span class="b">'+br+'</span><span class="n">'+esc(st.name)+'</span><span class="r">血统 '+esc(st.rank)+' 级 · 已录取</span></div>';
+      }).join('');
+    }else{
+      feed.innerHTML='<div class="alEmpty">虚位以待 —— 期待第一位新生的名字出现在这里</div>';
+    }
+  }catch(e){}
+}
+admRender();
+setInterval(admRender,30000);
 
 /* ================= smooth chrome：进度条 / 返回顶部 / 导航高亮 ================= */
 const progEl=document.getElementById('progress'), topBtn=document.getElementById('toTop');

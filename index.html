@@ -318,6 +318,56 @@ section.block.alt{background:var(--parchment-deep);border-top:1px solid var(--li
 .alRow .r{color:var(--gold);font-size:12px;letter-spacing:.12em;margin-left:auto;}
 .alEmpty{padding:18px 2px;color:var(--ink-soft);font-size:13px;letter-spacing:.1em;text-align:center;}
 
+/* ---------- policy ---------- */
+.polGrid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start;}
+.polRules{counter-reset:rule;}
+.polRules .rule-item{
+  position:relative;padding:20px 22px 20px 78px;margin-bottom:14px;
+  background:var(--parchment);border:1px solid var(--line);border-left:3px solid var(--crimson);
+  transition:.25s;
+}
+.polRules .rule-item:hover{border-left-color:var(--gold);transform:translateX(4px);}
+.polRules .rule-item::before{
+  counter-increment:rule;content:counter(rule,upper-roman);
+  position:absolute;left:20px;top:20px;width:40px;
+  font-family:'Cinzel',serif;font-size:22px;color:var(--gold);text-align:center;
+}
+.polRules h6{font-size:15px;letter-spacing:.16em;color:var(--crimson-deep);margin-bottom:6px;font-weight:600;}
+.polRules p{font-size:13px;color:var(--ink-soft);line-height:1.9;text-align:justify;margin:0;}
+.polRules p em{color:var(--crimson);font-style:normal;}
+.scholarCard{
+  border:1px solid var(--gold);outline:1px solid var(--gold);outline-offset:5px;
+  background:linear-gradient(rgba(168,135,61,.05),rgba(122,31,35,.04)),var(--parchment);
+  padding:36px 34px;position:sticky;top:130px;
+}
+.scholarCard .schKicker{text-align:center;font-size:10.5px;letter-spacing:.4em;color:var(--gold);font-family:'Cinzel',serif;}
+.scholarCard h4{
+  text-align:center;font-size:23px;font-weight:600;letter-spacing:.18em;
+  color:var(--crimson-deep);margin:10px 0 4px;
+}
+.scholarCard .schEn{text-align:center;font-size:10px;letter-spacing:.3em;color:var(--gold);font-family:'Cinzel',serif;margin-bottom:18px;}
+.scholarCard .schQuote{
+  text-align:center;font-size:13px;letter-spacing:.14em;color:var(--ink-soft);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:12px 0;margin-bottom:20px;
+}
+.scholarCard h6{
+  font-size:11.5px;letter-spacing:.3em;color:var(--gold);margin:18px 0 8px;
+  font-family:'Cinzel','Noto Serif SC',serif;
+}
+.scholarCard ul{list-style:none;margin:0;padding:0;}
+.scholarCard li{
+  font-size:13px;color:var(--ink);line-height:1.9;padding-left:18px;position:relative;margin-bottom:5px;
+}
+.scholarCard li::before{content:"◆";position:absolute;left:0;top:0;font-size:9px;color:var(--crimson);}
+.scholarCard li small{color:var(--ink-soft);}
+.scholarCard .schFoot{
+  margin-top:20px;font-size:12px;color:var(--ink-soft);line-height:2;text-align:justify;
+  border-top:1px dashed var(--gold-soft);padding-top:14px;
+}
+.scholarCard .schFoot b{color:var(--crimson-deep);}
+@media (max-width:860px){.polGrid{grid-template-columns:1fr;}.scholarCard{position:static;}}
+
 /* ---------- footer ---------- */
 footer{
   background:#1d1610;color:#b8a888;
@@ -778,6 +828,7 @@ nav.main a.cur::after{transform:scaleX(1);}
       <li><a href="#organizations">组织机构</a></li>
       <li><a href="#principal">校长致辞</a></li>
       <li><a href="#admission">招生事务</a></li>
+      <li><a href="#policy">学院政策</a></li>
       <li><a href="#nightwatch">守夜人专区</a></li>
     </ul>
   </nav>
@@ -872,7 +923,7 @@ nav.main a.cur::after{transform:scaleX(1);}
           <dt>AFFILIATION · 隶属</dt>
           <dd>The Secret Party<br><small>秘党</small></dd>
           <dt>SCHOLARSHIP · 奖学金</dt>
-          <dd>Full Scholarship for All Students<br><small>全体在校生享全额奖学金</small></dd>
+          <dd>The Nibelungen Scholarship<br><small>尼伯龙根奖学金 · 全体在校生全额覆盖</small></dd>
         </dl>
       </aside>
     </div>
@@ -1107,7 +1158,7 @@ nav.main a.cur::after{transform:scaleX(1);}
       <div class="adm rv">
         <div class="step"><span>III</span></div>
         <h5>入学与誓言</h5>
-        <p>通过评定者将获得全额奖学金与终身档案编号，在开学典礼上与全体新生一同宣读校训——自此，你不再独行。</p>
+        <p>通过评定者将自动获得「尼伯龙根奖学金」与终身档案编号，在开学典礼上与全体新生一同宣读校训——自此，你不再独行。</p>
       </div>
     </div>
     <div class="admLive rv">
@@ -1123,12 +1174,97 @@ nav.main a.cur::after{transform:scaleX(1);}
       </div>
     </div>
     <div class="notice rv">
-      <b>招生办公室谨启：</b>本院全体在校生均享全额奖学金待遇，衣食住行皆由学院承担。<br>
+      <b>招生办公室谨启：</b>本院全体在校生均享「尼伯龙根奖学金」全额待遇，衣食住行皆由学院承担（详见<a href="#policy" style="text-decoration:underline;">学院政策</a>）。<br>
       若您从未收到过我们的信函，请相信——那是一种幸运。愿您安度平凡而幸福的一生。
     </div>
     <div class="rv" style="text-align:center;margin-top:36px;">
       <button class="btnMain" style="width:auto;padding:14px 56px;" onclick="openAuth('register')">注 册 学 籍 · ENROLL NOW</button>
       <div style="font-size:11.5px;color:var(--ink-soft);letter-spacing:.2em;margin-top:12px;" class="en">RECEIVE YOUR 3E EVALUATION &amp; STUDENT ID</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= POLICY ================= -->
+<section class="block" id="policy">
+  <div class="wrap">
+    <div class="secHead rv">
+      <div class="kicker">POLICIES &amp; REGULATIONS</div>
+      <h3>学院政策</h3>
+      <div class="rule"></div>
+    </div>
+    <div class="polGrid">
+      <div class="polRules rv">
+        <div class="rule-item">
+          <h6>保密条例</h6>
+          <p>非经学院许可，不得向任何普通人类透露学院、龙族及混血种的存在。违者记大过；造成实质泄密的，移交执行部按《掩饰协议》处理。<em>这是卡塞尔唯一没有商量余地的规矩。</em></p>
+        </div>
+        <div class="rule-item">
+          <h6>宵禁制度</h6>
+          <p>工作日 23:00 后未经报备不得离开宿舍区，湖区与后山夜间禁行。「自由一日」当晚宵禁解除——那一晚，连昂热校长也管不了你们。</p>
+        </div>
+        <div class="rule-item">
+          <h6>言灵管制</h6>
+          <p>未经导师监护，严禁在校园内释放任何言灵；违者按危险等级处罚。地下三层受控训练区除外。<em>参见图书馆重建纪念铭牌。</em></p>
+        </div>
+        <div class="rule-item">
+          <h6>装备管理</h6>
+          <p>屠龙兵器仅限任务与训练使用，出入校门须在装备部登记编号。私藏、改装或转借武器视同严重违纪，装备部有权当场回收——「铁手」的手很快。</p>
+        </div>
+        <div class="rule-item">
+          <h6>决斗备案</h6>
+          <p>学生间正式决斗须提前 48 小时向风纪委员会（曼施坦因教授）书面备案，由校医院派员到场。未备案的私斗，双方各记过一次，无论胜负。</p>
+        </div>
+        <div class="rule-item">
+          <h6>档案库权限</h6>
+          <p>图书馆地下 B2 层以下凭血统权限进入；封印书架非请勿触。<em>触碰后果自负——此处「后果」为字面意义。</em></p>
+        </div>
+        <div class="rule-item">
+          <h6>离校报备</h6>
+          <p>假期离校须向学籍处登记去向与联络方式。紧急状态下，执行部有权召回任何在册学生——你的假期属于你，你的剑属于人类。</p>
+        </div>
+        <div class="rule-item">
+          <h6>诺玛使用规范</h6>
+          <p>禁止向诺玛查询他人隐私档案或提出与学业无关的私人问题。她会礼貌地拒绝，并且永久记录提问者。<em>已有 1,024 名学生以身试法。</em></p>
+        </div>
+      </div>
+      <aside class="scholarCard rv">
+        <div class="schKicker">FULL SCHOLARSHIP</div>
+        <h4>尼伯龙根奖学金</h4>
+        <div class="schEn">THE NIBELUNGEN SCHOLARSHIP</div>
+        <div class="schQuote">黄金之城沉没了，它的财富用来供养屠龙的人</div>
+        <h6>命名由来 · ORIGIN</h6>
+        <ul>
+          <li>以传说中沉没的黄金之都<b>尼伯龙根</b>命名，基金源自秘党数百年间历代屠龙所得与产业积累。</li>
+        </ul>
+        <h6>生效条件 · ACTIVATION</h6>
+        <ul>
+          <li>收到录取通知书并完成学籍注册之时<b>自动生效</b>，无需申请、无需担保；</li>
+          <li>覆盖全部在校年限，直至毕业或学籍终止。</li>
+        </ul>
+        <h6>覆盖范围 · COVERAGE</h6>
+        <ul>
+          <li>学费与住宿全免；</li>
+          <li>每月生活津贴（按分部物价核定）；</li>
+          <li>训练物资与制式装备；</li>
+          <li>每学年一次探亲往返机票；</li>
+          <li>全额医疗——含言灵反噬治疗。</li>
+        </ul>
+        <h6>维持条件 · MAINTENANCE</h6>
+        <ul>
+          <li>学业不低于 C 等 <small>（挂科可在「补救周」恢复）</small>；</li>
+          <li>晨训与必修课出勤达标；</li>
+          <li>保密条例零违规。</li>
+        </ul>
+        <h6>中止与恢复 · SUSPENSION</h6>
+        <ul>
+          <li>一般违纪：暂停发放，由风纪委员会裁定恢复；</li>
+          <li>泄密：永久取消，记入终身档案。</li>
+        </ul>
+        <div class="schFoot">
+          <b>附则：</b>卡塞尔学院从不因贫穷拒绝任何一位混血种。你只需要带着自己来——
+          黄金之城的财富，属于每一个回家的怪物。
+        </div>
+      </aside>
     </div>
   </div>
 </section>
@@ -1230,6 +1366,7 @@ nav.main a.cur::after{transform:scaleX(1);}
           <li><a href="#departments">院系设置</a></li>
           <li><a href="#organizations">组织机构</a></li>
           <li><a href="#admission">招生事务</a></li>
+          <li><a href="#policy">学院政策</a></li>
           <li><a href="#nightwatch">守夜人专区</a></li>
         </ul>
       </div>

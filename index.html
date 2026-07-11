@@ -128,6 +128,48 @@ nav.main a:hover::after{transform:scaleX(1);}
   color:rgba(239,230,208,.82);font-weight:300;letter-spacing:.06em;
 }
 
+/* ---------- dragon eye & awakening ---------- */
+.heroGlow{
+  position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 2.2s ease;
+  background:radial-gradient(ellipse at 50% 42%, rgba(231,194,102,.30), transparent 58%);
+}
+body.awakened .heroGlow{opacity:1;}
+.eyeWrap{margin:26px auto 6px;width:min(430px,86vw);}
+#dragonEye{display:block;width:100%;height:auto;}
+#dragonEye .lidT,#dragonEye .lidB{transition:transform 1.6s cubic-bezier(.65,0,.25,1);}
+body.awakened #dragonEye .lidT{transform:translateY(-125px);}
+body.awakened #dragonEye .lidB{transform:translateY(125px);}
+body.awakened.blink #dragonEye .lidT{transform:translateY(-12px);transition-duration:.13s;}
+body.awakened.blink #dragonEye .lidB{transform:translateY(12px);transition-duration:.13s;}
+#eyeCrease{transition:opacity 1.2s;}
+body.awakened #eyeCrease{opacity:0;}
+.eyeOutline{transition:opacity 1.4s;}
+body.awakened .eyeOutline{opacity:.85;}
+#eyeBall{transition:filter 1.5s;}
+body.awakened #eyeBall{filter:drop-shadow(0 0 16px rgba(231,194,102,.65));}
+.eyeCap{
+  text-align:center;font-size:10.5px;letter-spacing:.42em;
+  color:rgba(196,169,106,.5);transition:color 1.5s;margin-bottom:26px;
+  font-family:'Cinzel','Noto Serif SC',serif;
+}
+body.awakened .eyeCap{color:#e7c266;text-shadow:0 0 12px rgba(231,194,102,.4);}
+body.awakened .hero h2{color:#fff0cd;text-shadow:0 0 28px rgba(231,194,102,.4);transition:all 1.8s;}
+body.awakened .hero .motto{color:#ffe9a8;border-color:rgba(231,194,102,.85);transition:all 1.8s;}
+body.awakened .hero .crest{filter:drop-shadow(0 0 14px rgba(231,194,102,.5));transition:filter 1.8s;}
+body.awakened{--gold:#b8944a;--gold-soft:#d8b871;}
+
+/* ---------- campus band ---------- */
+.campusBand{
+  background:#150f09;position:relative;overflow:hidden;
+  border-top:3px double var(--gold);border-bottom:3px double var(--gold);
+}
+.campusBand svg{display:block;width:100%;height:250px;}
+.cbCap{
+  position:absolute;bottom:13px;left:0;right:0;text-align:center;
+  font-size:10.5px;letter-spacing:.5em;color:rgba(196,169,106,.6);
+  font-family:'Cinzel','Noto Serif SC',serif;
+}
+
 /* ---------- stats strip ---------- */
 .stats{
   background:var(--crimson-deep);
@@ -907,11 +949,45 @@ nav.main a.cur::after{transform:scaleX(1);}
 
 <!-- ================= HERO ================= -->
 <div class="hero">
+  <div class="heroGlow"></div>
   <svg class="crest" width="150" height="150" aria-hidden="true" style="--c1:#c4a96a;--c2:#e7d7ac;">
     <use href="#crestTree"/>
   </svg>
   <h2>卡塞尔学院</h2>
   <div class="heroEn en">CASSELL COLLEGE · SINCE THE AGE OF SECRETS</div>
+  <div class="eyeWrap">
+    <svg id="dragonEye" viewBox="0 0 600 200" aria-hidden="true">
+      <defs>
+        <radialGradient id="irisG" cx="50%" cy="50%">
+          <stop offset="0%" stop-color="#ffedb0"/>
+          <stop offset="30%" stop-color="#eec661"/>
+          <stop offset="65%" stop-color="#a8873d"/>
+          <stop offset="100%" stop-color="#4a370f"/>
+        </radialGradient>
+        <clipPath id="eyeClip"><path d="M55,100 Q300,-40 545,100 Q300,240 55,100 Z"/></clipPath>
+      </defs>
+      <g clip-path="url(#eyeClip)">
+        <rect x="0" y="-60" width="600" height="320" fill="#0d0903"/>
+        <g id="eyeBall">
+          <circle cx="300" cy="100" r="88" fill="url(#irisG)"/>
+          <g stroke="#7a5c1c" stroke-width="1" opacity=".45">
+            <path d="M300,14 V186 M226,49 L374,151 M226,151 L374,49 M214,100 H386 M258,22 L342,178 M258,178 L342,22"/>
+          </g>
+          <circle cx="300" cy="100" r="88" fill="none" stroke="#5c4715" stroke-width="3"/>
+          <ellipse id="pupil" cx="300" cy="100" rx="15" ry="64" fill="#0b0602"/>
+          <ellipse cx="268" cy="70" rx="13" ry="7" fill="rgba(255,244,210,.5)" transform="rotate(-24 268 70)"/>
+        </g>
+        <rect class="lidT" x="-20" y="-140" width="640" height="240" fill="#16100a"/>
+        <rect class="lidB" x="-20" y="100" width="640" height="240" fill="#16100a"/>
+      </g>
+      <path class="eyeOutline" d="M55,100 Q300,-40 545,100 Q300,240 55,100 Z" fill="none" stroke="#c4a96a" stroke-width="2" opacity="0"/>
+      <path id="eyeCrease" d="M55,100 Q300,140 545,100" fill="none" stroke="#4a3f2c" stroke-width="3" stroke-linecap="round"/>
+      <g id="eyeLash" stroke="#4a3f2c" stroke-width="2.5" stroke-linecap="round">
+        <path d="M80,106 l-16,10 M120,116 l-13,12 M520,106 l16,10 M480,116 l13,12"/>
+      </g>
+    </svg>
+    <div class="eyeCap" id="eyeCap">沉 睡 之 瞳 · 它 在 等 待 与 它 血 脉 相 连 的 人</div>
+  </div>
   <div>
     <div class="motto">与 龙 族 势 不 两 立</div>
     <div class="mottoEn">WE STAND AGAINST THE DRAGON, NOW AND EVER</div>
@@ -997,6 +1073,64 @@ nav.main a.cur::after{transform:scaleX(1);}
     </div>
   </div>
 </section>
+
+<!-- ================= CAMPUS SILHOUETTE ================= -->
+<div class="campusBand rv">
+  <svg viewBox="0 0 1200 260" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+    <g stroke="#c4a96a" fill="none" stroke-width="1.5">
+      <g fill="#c4a96a" stroke="none" opacity=".7">
+        <circle cx="140" cy="52" r="1.5"/><circle cx="320" cy="36" r="1.2"/><circle cx="500" cy="58" r="1"/>
+        <circle cx="760" cy="32" r="1.4"/><circle cx="1085" cy="72" r="1.2"/><circle cx="885" cy="50" r="1"/>
+        <circle cx="220" cy="90" r="1"/><circle cx="1150" cy="40" r="1.3"/>
+      </g>
+      <circle cx="1000" cy="64" r="26" opacity=".8"/>
+      <path d="M986,47 a26,26 0 0,0 0,34" opacity=".35"/>
+      <path d="M835,88 q8,-9 16,0 q-8,-4 -16,0 Z" fill="#c4a96a" stroke="none" opacity=".55"/>
+      <path d="M868,74 q6,-7 12,0 q-6,-3 -12,0 Z" fill="#c4a96a" stroke="none" opacity=".35"/>
+      <g opacity=".32">
+        <path d="M80,200 v-46 l14,-16 14,16 v46"/>
+        <path d="M132,200 v-30 h34 v30"/>
+        <path d="M1032,200 v-40 l12,-14 12,14 v40"/>
+        <path d="M1092,200 v-26 h42 v26"/>
+      </g>
+      <g opacity=".6">
+        <path d="M220,200 l16,-34 16,34 Z"/>
+        <path d="M226,178 l10,-22 10,22"/>
+        <path d="M268,200 l13,-27 13,27 Z"/>
+        <path d="M180,200 l11,-22 11,22 Z"/>
+        <path d="M920,200 l15,-32 15,32 Z"/>
+        <path d="M926,180 l9,-20 9,20"/>
+        <path d="M962,200 l12,-24 12,24 Z"/>
+      </g>
+      <g stroke-width="2">
+        <path d="M560,200 v-95 h80 v95"/>
+        <path d="M552,105 h96"/>
+        <path d="M560,105 l40,-54 40,54"/>
+        <path d="M600,51 v-16 l14,6 -14,6"/>
+        <circle cx="600" cy="132" r="15"/>
+        <path d="M600,132 v-9 M600,132 l7,5"/>
+        <path d="M588,200 v-26 q12,-14 24,0 v26"/>
+        <path d="M480,200 v-52 h80 M640,148 h80 v52"/>
+        <path d="M480,148 h10 v-8 h10 v8 h10 v-8 h10 v8 h10 v-8 h10 v8 h10 v-8 h10 v8" opacity=".8"/>
+        <path d="M640,148 h10 v-8 h10 v8 h10 v-8 h10 v8 h10 v-8 h10 v8 h10 v-8 h10 v8" opacity=".8"/>
+        <g opacity=".55" stroke-width="1.2">
+          <path d="M502,178 v-12 q6,-8 12,0 v12"/>
+          <path d="M534,178 v-12 q6,-8 12,0 v12"/>
+          <path d="M658,178 v-12 q6,-8 12,0 v12"/>
+          <path d="M690,178 v-12 q6,-8 12,0 v12"/>
+          <path d="M593,92 v-9 q7,-9 14,0 v9"/>
+        </g>
+      </g>
+      <path d="M0,200 H1200" stroke-width="2"/>
+      <g opacity=".3">
+        <path d="M520,212 h60 M622,212 h70 M560,224 h84 M592,236 h44"/>
+        <path d="M978,212 h44 M1000,222 h28"/>
+        <path d="M240,212 h40"/>
+      </g>
+    </g>
+  </svg>
+  <div class="cbCap">CHICAGO · THE GREAT LAKES · CASSELL MAIN CAMPUS</div>
+</div>
 
 <!-- ================= HISTORY ================= -->
 <section class="block alt" id="history">
@@ -2227,7 +2361,35 @@ setInterval(()=>{
 },5000);
 nwRefreshHint(); nwRender();
 const _oldRefreshTopbar=refreshTopbar;
-refreshTopbar=function(){ _oldRefreshTopbar(); nwRefreshHint(); };
+refreshTopbar=function(){ _oldRefreshTopbar(); nwRefreshHint(); setAwakened(!!CUR); };
+
+/* ================= 黄金瞳觉醒 ================= */
+let blinkTimer=null;
+function setAwakened(on){
+  document.body.classList.toggle('awakened',on);
+  const cap=document.getElementById('eyeCap');
+  if(cap)cap.textContent=on
+    ? ('黄 金 瞳 正 注 视 着 你 · 欢 迎 回 家 ，'+((CUR&&CUR.name)||''))
+    : '沉 睡 之 瞳 · 它 在 等 待 与 它 血 脉 相 连 的 人';
+  clearInterval(blinkTimer);
+  if(on){
+    blinkTimer=setInterval(function(){
+      document.body.classList.add('blink');
+      setTimeout(function(){document.body.classList.remove('blink');},210);
+    },6500);
+  }
+}
+document.addEventListener('mousemove',function(e){
+  if(!document.body.classList.contains('awakened'))return;
+  const eye=document.getElementById('dragonEye');
+  const b=document.getElementById('eyeBall');
+  if(!eye||!b)return;
+  const r=eye.getBoundingClientRect();
+  if(r.bottom<0||r.top>window.innerHeight)return;
+  const dx=Math.max(-26,Math.min(26,(e.clientX-(r.left+r.width/2))/28));
+  const dy=Math.max(-12,Math.min(12,(e.clientY-(r.top+r.height/2))/28));
+  b.setAttribute('transform','translate('+dx+' '+dy+')');
+});
 </script>
 </body>
 </html>
